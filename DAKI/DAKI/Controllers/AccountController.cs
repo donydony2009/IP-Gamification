@@ -80,6 +80,15 @@ namespace DAKI.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    Roles.AddUserToRole(model.UserName, Types.Role.Regular);
+                    using (var context = new UsersContext())
+                    {
+                        if (context.Database.Exists())
+                        {
+                            context.UserProfiles.First<UserProfile>(e => e.UserName == model.UserName).Email = model.Email;
+                            context.SaveChanges();
+                        }
+                    }
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
@@ -102,7 +111,6 @@ namespace DAKI.Controllers
         {
             string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
             ManageMessageId? message = null;
-
             // Only disassociate the account if the currently logged in user is the owner
             if (ownerAccount == User.Identity.Name)
             {
@@ -326,6 +334,51 @@ namespace DAKI.Controllers
 
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
+        }
+
+        //
+        // GET: /Account/GrantRole
+        [AllowAnonymous]
+        public ActionResult GrantRole(string returnUrl)
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/GrantRole
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult GrantRole(GrantRoleModel model, string returnUrl)
+        {
+            if (ModelState.IsValid && User.IsInRole(Types.Role.Admin))
+            {
+                using (var context = new UsersContext())
+                {
+                    if (context.Database.Exists())
+                    {
+                        if (context.UserProfiles.Count<UserProfile>(e => e.UserName == model.UserName) == 0)
+                        {
+                            ModelState.AddModelError("", "The user does not exist");
+                            return View();
+                        }
+                    }
+                }
+                if (Roles.GetAllRoles().Count(e => e == model.Role) == 0)
+                {
+                    ModelState.AddModelError("", "The role does not exist");
+                    return View();
+                }
+
+                if (User.IsInRole(model.Role))
+                {
+                    ModelState.AddModelError("", "The user already has that role");
+                    return View();
+                }
+                Roles.AddUserToRole(model.UserName, model.Role);
+            }
+
+            ModelState.AddModelError("", "Something went wrong.");
+            return View();
         }
 
         #region Helpers
