@@ -222,6 +222,11 @@ namespace DAKI.Controllers
         //
         // GET: /Account/ExternalLoginCallback
 
+        public ActionResult RoleManagement()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
@@ -341,7 +346,7 @@ namespace DAKI.Controllers
         [AllowAnonymous]
         public ActionResult GrantRole(string returnUrl)
         {
-            return View();
+            return RedirectToAction("RoleManagement");
         }
 
         //

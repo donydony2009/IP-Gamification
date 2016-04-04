@@ -1,0 +1,69 @@
+﻿@model DAKI.Models.RoleManagementModel
+@{
+    ViewBag.Title = "Role Management";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<section id="loginForm">
+@if(!User.IsInRole(Types.Role.Admin))
+{
+    @Html.Partial("_NoPermissionsPartial");
+}
+else
+{
+    <fieldset>
+        <legend></legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBox("username")
+            </li>
+        </ol>
+    </fieldset>
+    <button type="button" onclick="AddUsernameToQuery()">Search</button>
+    <br />
+    <br />
+    <br />
+    if(Model != null && Model.UserName != null)
+    {
+        <div>Roles for the user <b>@Model.UserName</b></div>
+        <ul>
+        @foreach (var role in Roles.GetRolesForUser(Model.UserName))
+        {
+            <li>@role</li>
+        }
+        </ul>
+    }
+    using (Html.BeginForm("GrantRole", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>GrantRole</legend>
+            <ol>
+                @Html.Hidden("UserName", Model.UserName);
+                <li>
+                    @Html.Label("Role")
+                    @{
+                     List<SelectListItem> items = new List<SelectListItem>();
+                     foreach(var role in Roles.GetAllRoles())
+                     {
+                           items.Add(new SelectListItem { Text = role, Value = role});
+                     }
+                    }
+                    @Html.DropDownList("Role", items)
+                </li>
+            </ol>
+            <input type="submit" value="Grant Role" />
+        </fieldset>
+    }
+    
+}
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

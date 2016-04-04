@@ -100,15 +100,4 @@ namespace DAKI.Models
         public string ProviderDisplayName { get; set; }
         public string ProviderUserId { get; set; }
     }
-
-    public class GrantRoleModel
-    {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        [Required]
-        [Display(Name = "Role")]
-        public string Role { get; set; }
-    }
 }
