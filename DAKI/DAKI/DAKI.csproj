@@ -296,9 +296,7 @@
     <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
     <Content Include="Views\Admin\RoleManagement.cshtml" />
     <Content Include="Views\Account\IKnowYourSecret.cshtml" />
-    <Content Include="Views\Account\QQ_kido.cshtml">
-      <SubType>Code</SubType>
-    </Content>
+    <Content Include="Views\Account\ObeyMe.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
