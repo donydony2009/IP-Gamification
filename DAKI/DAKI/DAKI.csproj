@@ -302,6 +302,7 @@
     <Content Include="Views\Account\Hug.cshtml" />
     <Content Include="Views\Account\ObeyMe.cshtml" />
     <Content Include="Views\Account\Donut.cshtml" />
+    <Content Include="Views\Account\TellMe.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
