@@ -300,6 +300,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Account\Hug.cshtml" />
+    <Content Include="Views\Account\ObeyMe.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
