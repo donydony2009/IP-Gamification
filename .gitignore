@@ -19,7 +19,6 @@ $RECYCLE.BIN/
 
 # Visual Studio
 *.suo
-*.cache
 
 # =========================
 # Operating System Files
@@ -49,3 +48,4 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.cache
