@@ -294,6 +294,7 @@
     <Content Include="Views\Account\_NoPermissionsPartial.cshtml" />
     <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
     <Content Include="Views\Admin\RoleManagement.cshtml" />
+    <Content Include="Views\Account\View1.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
