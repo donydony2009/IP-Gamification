@@ -170,7 +170,6 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
-    <Compile Include="Models\qqController.cs" />
     <Compile Include="Models\Types.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -300,10 +299,13 @@
     <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
     <Content Include="Views\Admin\RoleManagement.cshtml" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Content Include="Views\Account\TEST_TO_BE_REMOVED.cshtml" />
 =======
 >>>>>>> origin/master
 >>>>>>> origin/master
+=======
+>>>>>>> parent of 936c1ba... Test Merging
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
