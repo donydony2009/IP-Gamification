@@ -299,6 +299,7 @@
     <Content Include="Views\Account\QQ_kido.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Account\Hug.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
