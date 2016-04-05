@@ -297,6 +297,7 @@
     <Content Include="Views\Admin\RoleManagement.cshtml" />
     <Content Include="Views\Account\IKnowYourSecret.cshtml" />
     <Content Include="Views\Account\ObeyMe.cshtml" />
+    <Content Include="Views\Account\TellMe.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
