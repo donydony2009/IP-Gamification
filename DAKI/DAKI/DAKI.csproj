@@ -293,8 +293,11 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\GrantRole.cshtml" />
     <Content Include="Views\Account\_NoPermissionsPartial.cshtml" />
+    <Content Include="Views\Account\TEST_TO_BE_REMOVED2.cshtml" />
     <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
     <Content Include="Views\Admin\RoleManagement.cshtml" />
+    <Content Include="Views\Account\TEST_TO_BE_REMOVED.cshtml" />
+    <Content Include="Views\Account\QQ_kido.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
