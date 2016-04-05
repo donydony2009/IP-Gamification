@@ -298,6 +298,7 @@
     <Content Include="Views\Account\IKnowYourSecret.cshtml" />
     <Content Include="Views\Account\ObeyMe.cshtml" />
     <Content Include="Views\Account\TellMe.cshtml" />
+    <Content Include="Views\Account\Death.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
