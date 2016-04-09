@@ -14,6 +14,7 @@
 }
 else
 {
+    @Html.ValidationMessage("userNotFound");
     <fieldset>
         <legend></legend>
         <ol>
@@ -23,28 +24,43 @@ else
             </li>
         </ol>
     </fieldset>
-    <button type="button" onclick="AddUsernameToQuery()">Search</button>
-    <br />
-    <br />
+    <button type="button" onclick="AddUsernameToQuery()">Select</button>
     <br />
     if(Model != null && Model.UserName != null)
     {
+        <br />
         <div>Roles for the user <b>@Model.UserName</b></div>
-        <ul>
-        @foreach (var role in Roles.GetRolesForUser(Model.UserName))
+        @Html.ValidationMessage("removeRoleError");
+        <table>
+        @if(Model != null && Model.UserName != null)
         {
-            <li>@role</li>
+            foreach (var role in Roles.GetRolesForUser(Model.UserName))
+            {
+                <tr><td>@role</td>
+                <td>
+                @using (Html.BeginForm("RoleManagement/remove", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.Hidden("Username", Model.UserName);
+                    @Html.Hidden("Role", role);
+                    <input type="submit" value="Remove" />
+                }
+                </td>
+                </tr>
+            }
         }
-        </ul>
+        </table>
     }
-    using (Html.BeginForm("GrantRole", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }))
+    @Html.ValidationMessage("grantRoleError");
+    using (Html.BeginForm("RoleManagement/add", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         <fieldset>
             <legend>GrantRole</legend>
             <ol>
-                @Html.Hidden("UserName", Model.UserName);
+                @Html.Hidden("UserName", Model.UserName)
                 <li>
                     @Html.Label("Role")
                     @{

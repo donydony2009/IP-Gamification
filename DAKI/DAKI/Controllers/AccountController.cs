@@ -23,6 +23,10 @@ namespace DAKI.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (WebSecurity.IsAuthenticated)
+            {
+                return RedirectToLocal("/Account/Manage");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -222,11 +226,6 @@ namespace DAKI.Controllers
         //
         // GET: /Account/ExternalLoginCallback
 
-        public ActionResult RoleManagement()
-        {
-            return View();
-        }
-
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
@@ -339,51 +338,6 @@ namespace DAKI.Controllers
 
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
-        }
-
-        //
-        // GET: /Account/GrantRole
-        [AllowAnonymous]
-        public ActionResult GrantRole(string returnUrl)
-        {
-            return RedirectToAction("RoleManagement");
-        }
-
-        //
-        // POST: /Account/GrantRole
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult GrantRole(GrantRoleModel model, string returnUrl)
-        {
-            if (ModelState.IsValid && User.IsInRole(Types.Role.Admin))
-            {
-                using (var context = new UsersContext())
-                {
-                    if (context.Database.Exists())
-                    {
-                        if (context.UserProfiles.Count<UserProfile>(e => e.UserName == model.UserName) == 0)
-                        {
-                            ModelState.AddModelError("", "The user does not exist");
-                            return View();
-                        }
-                    }
-                }
-                if (Roles.GetAllRoles().Count(e => e == model.Role) == 0)
-                {
-                    ModelState.AddModelError("", "The role does not exist");
-                    return View();
-                }
-
-                if (User.IsInRole(model.Role))
-                {
-                    ModelState.AddModelError("", "The user already has that role");
-                    return View();
-                }
-                Roles.AddUserToRole(model.UserName, model.Role);
-            }
-
-            ModelState.AddModelError("", "Something went wrong.");
-            return View();
         }
 
         #region Helpers
