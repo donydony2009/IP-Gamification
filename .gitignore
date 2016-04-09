@@ -48,4 +48,6 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-DAKI.csprojResolveAssemblyReference.cache
+*.cache
+*.dll
+*.pdb
