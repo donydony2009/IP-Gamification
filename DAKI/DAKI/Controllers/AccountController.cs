@@ -37,7 +37,7 @@ namespace DAKI.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToLocal("/Account/Manage");
+                return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
