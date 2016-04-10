@@ -1,15 +1,15 @@
 ﻿html {
-    background-color: #e2e2e2;
+    background-color: #F8F8F8;
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-color: #fff;
-    border-top: solid 10px #000;
+    background-color: #F8F8F8;
+    border-top: solid 10px #FFC40A;
     color: #333;
     font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -99,19 +99,19 @@ h5, h6 {
 }
 
 #body {
-    background-color: #efeeef;
+    background-color: #F8F8F8;
     clear: both;
     padding-bottom: 35px;
 }
 
     .main-content {
-        background: url("../Images/accent.png") no-repeat;
+        /*background: url("../Images/accent.png") no-repeat;*/
         padding-left: 10px;
         padding-top: 30px;
     }
 
     .featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
+        /*background: url("../Images/heroAccent.png") no-repeat;*/
     }
 
 header .content-wrapper {
@@ -329,52 +329,63 @@ aside {
 }
 
 /* login page */
-#loginForm {
-    border-right: solid 2px #c8c8c8;
-    float: left;
-    width: 55%;
+#title-login {
+    text-align: center;
+    font-size: 120%;
 }
+.loginForm {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+    .loginForm label {
+        text-align: center;
+    }
 
-    #loginForm .validation-error {
+    .loginForm p {
+        text-align:center;
+    }
+
+    .loginForm .validation-error {
         display: block;
         margin-left: 15px;
     }
 
-    #loginForm .validation-summary-errors ul {
+    .loginForm .validation-summary-errors ul {
         margin: 0;
         padding: 0;
     }
 
-    #loginForm .validation-summary-errors li {
+    .loginForm .validation-summary-errors li {
         display: inline;
         list-style: none;
         margin: 0;
     }
 
-    #loginForm input {
-        width: 250px;
+    .loginForm input {
+        width: 100%;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-color: #c1bcae;
     }
 
-    #loginForm input[type="checkbox"],
-    #loginForm input[type="submit"],
-    #loginForm input[type="button"],
-    #loginForm button {
+    .loginForm input[type="checkbox"],
+    .loginForm input[type="submit"],
+    .loginForm input[type="button"],
+    .loginForm button {
         width: auto;
     }
-
-#socialLoginForm {
-    margin-left: 40px;
-    float: left;
-    width: 40%;
-}
-
-    #socialLoginForm h2 {
-        margin-bottom:  5px;
+    .loginForm input[type="submit"] {
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        width: 30%;
+        background-color: #ffd245;
+        border-color: #fff8e0;
     }
-
-#socialLoginList button {
-    margin-bottom: 12px;
-}
 
 #logoutForm {
     display: inline;
@@ -729,7 +740,9 @@ tr.pager td {
             display: block;
             margin-left: 15px;
         }
-
+    #socialLoginList button {
+        margin-bottom: 12px;
+    }
     #socialLoginForm {
         margin-left: 0;
         float: none;
@@ -749,14 +762,13 @@ tr.pager td {
         height: auto;
         padding: 10px 0;
     }
-
     .list-style {
         display: list-item;
         margin-left: 1.3em;
         list-style-type: circle;  
     }
-
-        footer p {
-            margin: 0;
-        }
+    
+    footer p {
+        margin: 0;
+    }
 }
