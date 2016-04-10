@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>@ViewBag.Title</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
@@ -13,21 +13,26 @@
     <body>
         <header>
             <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                <div class="float-left title-line">
+                    <p class="site-title">@Html.ActionLink("DAKI", "Index", "Home")</p>
                 </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
+                 <div class="float-left" id="nav-bar">
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")
+                                <ul>
+                                    <li>@Html.ActionLink("Mock1", "Contact", "Home")</li>
+                                    <li>@Html.ActionLink("Mock2", "Contact", "Home")</li>
+                                </ul>
+                            </li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <span class="float-right">@Html.Partial("_LoginPartial")</span>
                         </ul>
+                        
                     </nav>
                 </div>
+                
             </div>
         </header>
         <div id="body">
@@ -39,7 +44,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; @DateTime.Now.Year- DAKI</p>
                 </div>
             </div>
         </footer>
