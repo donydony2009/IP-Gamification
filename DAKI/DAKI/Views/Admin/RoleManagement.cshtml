@@ -38,12 +38,13 @@ else
             {
                 <tr><td>@role</td>
                 <td>
-                @using (Html.BeginForm("RoleManagement/remove", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                @using (Html.BeginForm("RoleManagement", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }))
                 {
+                    @Html.HttpMethodOverride(HttpVerbs.Delete)
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     @Html.Hidden("Username", Model.UserName);
-                    @Html.Hidden("Role", role);
+                    <input id="Role" name="Role" type="hidden" value="@role">
                     <input type="submit" value="Remove" />
                 }
                 </td>
@@ -53,7 +54,7 @@ else
         </table>
     }
     @Html.ValidationMessage("grantRoleError");
-    using (Html.BeginForm("RoleManagement/add", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }))
+    using (Html.BeginForm("RoleManagement", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)

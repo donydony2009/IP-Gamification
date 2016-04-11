@@ -37,13 +37,9 @@ namespace DAKI.Controllers
         //
         // POST: /Account/RoleManagement
         [HttpPost]
-        public ActionResult RoleManagement(RoleManagementModel model, string command, string returnUrl)
+        public ActionResult RoleManagement(RoleManagementModel model, string returnUrl)
         {
             string errorKey = "grantRoleError";
-            if (command == "remove")
-            {
-                errorKey = "removeRoleError";
-            }
             if (ModelState.IsValid && User.IsInRole(Types.Role.Admin))
             {
                 if(!WebSecurity.UserExists(model.UserName))
@@ -58,29 +54,49 @@ namespace DAKI.Controllers
                     return View(model);
                 }
 
-                switch(command)
+
+                if (User.IsInRole(model.Role))
                 {
-                    case "add":
-                        {
-                            if (User.IsInRole(model.Role))
-                            {
-                                ModelState.AddModelError(errorKey, "The user already has that role");
-                                return View(model);
-                            }
-                            Roles.AddUserToRole(model.UserName, model.Role);
-                        }
-                        break;
-                    case "remove":
-                        {
-                            if (!User.IsInRole(model.Role))
-                            {
-                                ModelState.AddModelError(errorKey, "The user is not in that role");
-                                return View(model);
-                            }
-                            Roles.RemoveUserFromRole(model.UserName, model.Role);
-                        }
-                        break;
+                    ModelState.AddModelError(errorKey, "The user already has that role");
+                    return View(model);
                 }
+                Roles.AddUserToRole(model.UserName, model.Role);
+
+
+                return View(model);
+            }
+
+            ModelState.AddModelError("userNotFound", "Something went wrong.");
+            return View(model);
+        }
+
+        //
+        // DELETE: /Account/RoleManagement
+        [HttpDelete]
+        public ActionResult RoleManagement(RoleManagementModel model, string returnUrl, string nothing)
+        {
+            string errorKey = "removeRoleError";
+
+            if (ModelState.IsValid && User.IsInRole(Types.Role.Admin))
+            {
+                if (!WebSecurity.UserExists(model.UserName))
+                {
+                    ModelState.AddModelError("userNotFound", "The user does not exist");
+                    model.UserName = null;
+                    return View(model);
+                }
+                if (Roles.GetAllRoles().Count(e => e == model.Role) == 0)
+                {
+                    ModelState.AddModelError(errorKey, "The role does not exist");
+                    return View(model);
+                }
+
+                if (!User.IsInRole(model.Role))
+                {
+                    ModelState.AddModelError(errorKey, "The user is not in that role");
+                    return View(model);
+                }
+                Roles.RemoveUserFromRole(model.UserName, model.Role);
 
                 return View(model);
             }
