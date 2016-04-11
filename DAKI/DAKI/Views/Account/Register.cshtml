@@ -1,13 +1,17 @@
-﻿@model DAKI.Models.RegisterModel
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@model DAKI.Models.RegisterModel
 @{
     ViewBag.Title = "Register";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
+<hgroup id="title-login">
+    <h2>Register</h2>
 </hgroup>
 
+<section class="loginForm">
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
@@ -35,6 +39,7 @@
         <input type="submit" value="Register" />
     </fieldset>
 }
+</section>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
