@@ -18,6 +18,9 @@ $RECYCLE.BIN/
 *.lnk
 
 # Visual Studio
+*.cache
+*.dll
+*.pdb
 *.suo
 
 # =========================
@@ -48,6 +51,3 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-*.cache
-*.dll
-*.pdb
