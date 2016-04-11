@@ -9,15 +9,22 @@ using System.Web.WebPages.Html;
 
 namespace DAKI.Models
 {
+    public class UserProfile
+    {
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+    }
     public class UsersContext : DbContext
     {
         public UsersContext()
-            : base("DefaultConnection")
+            : base("Enitites")
         {
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
+    /*
 
     [Table("UserProfile")]
     public class UserProfile
@@ -28,7 +35,7 @@ namespace DAKI.Models
         public string UserName { get; set; }
         public string Email { get; set; }
     }
-
+    */
     public class RegisterExternalLoginModel
     {
         [Required]
