@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using DAKI.Models;
 using System.Web.Security;
 using WebMatrix.WebData;
+using System.Data;
 
 namespace DAKI.Controllers
 {
@@ -14,11 +15,16 @@ namespace DAKI.Controllers
     [InitializeSimpleMembership]
     public class AdminController : Controller
     {
+        private UsersContext db = new UsersContext();
         //
         // GET: /Admin/RoleManagement
 
         public ActionResult RoleManagement(string command, string username)
         {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
             RoleManagementModel model = new RoleManagementModel();
             if (username != null)
             {
@@ -40,7 +46,12 @@ namespace DAKI.Controllers
         public ActionResult RoleManagement(RoleManagementModel model, string returnUrl)
         {
             string errorKey = "grantRoleError";
-            if (ModelState.IsValid && User.IsInRole(Types.Role.Admin))
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            if (ModelState.IsValid)
             {
                 if(!WebSecurity.UserExists(model.UserName))
                 {
@@ -76,8 +87,12 @@ namespace DAKI.Controllers
         public ActionResult RoleManagement(RoleManagementModel model, string returnUrl, string nothing)
         {
             string errorKey = "removeRoleError";
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
 
-            if (ModelState.IsValid && User.IsInRole(Types.Role.Admin))
+            if (ModelState.IsValid)
             {
                 if (!WebSecurity.UserExists(model.UserName))
                 {
@@ -117,6 +132,156 @@ namespace DAKI.Controllers
             }
         }
 
+        //
+        // GET: /Default1/Create
+
+        public ActionResult CreatePrize()
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+            return View();
+        }
+
+        //
+        // POST: /Default1/Create
+
+        [HttpPost]
+        public ActionResult CreatePrize(Prize prize)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.Prizes.Add(prize);
+                db.SaveChanges();
+                return RedirectToAction("ListPrizes");
+            }
+
+            return View(prize);
+        }
+
+        //
+        // GET: /Admin/ListPrizes
+
+        public ActionResult ListPrizes()
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            return View(db.Prizes.ToList());
+        }
+
+        //
+        // GET: /Admin/DetailsPrize/5
+
+        public ActionResult DetailsPrize(int id = 0)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            Prize prize = db.Prizes.Find(id);
+            if (prize == null)
+            {
+                return HttpNotFound();
+            }
+            return View(prize);
+        }
+
+        //
+        // GET: /Admin/DeletePrize/5
+
+        public ActionResult DeletePrize(int id = 0)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            Prize prize = db.Prizes.Find(id);
+            if (prize == null)
+            {
+                return HttpNotFound();
+            }
+            return View(prize);
+        }
+
+        //
+        // POST: /Admin/DeletePrize/5
+
+        [HttpPost, ActionName("DeletePrize")]
+        public ActionResult DeletePrizeConfirmed(int id)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            Prize prize = db.Prizes.Find(id);
+            db.Prizes.Remove(prize);
+            db.SaveChanges();
+            return RedirectToAction("ListPrizes");
+        }
+
+        //
+        // GET: /Admin/EditPrize/5
+
+        public ActionResult EditPrize(int id = 0)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            Prize prize = db.Prizes.Find(id);
+            if (prize == null)
+            {
+                return HttpNotFound();
+            }
+            return View(prize);
+        }
+
+        //
+        // POST: /Admin/EditPrize/5
+
+        [HttpPost]
+        public ActionResult EditPrize(Prize prize)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(prize).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ListPrizes");
+            }
+            return View(prize);
+        }
+
+        //
+        // GET: /Admin/NoPermissions
+
+        public ActionResult NoPermissions()
+        {
+            return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
 
     }
 }

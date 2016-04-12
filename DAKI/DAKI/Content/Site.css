@@ -829,4 +829,9 @@ tr.pager td {
     footer p {
         margin: 0;
     }
+
+    display-label {
+        font-weight:bold;
+        font-size:15px;
+    }
 }
