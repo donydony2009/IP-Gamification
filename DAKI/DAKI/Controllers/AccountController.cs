@@ -57,8 +57,8 @@ namespace DAKI.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
-            return RedirectToAction("Index");
+            
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -139,6 +139,10 @@ namespace DAKI.Controllers
 
         public ActionResult Manage(ManageMessageId? message)
         {
+            if (!WebSecurity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -156,6 +160,10 @@ namespace DAKI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
+            if (!WebSecurity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
@@ -349,28 +357,32 @@ namespace DAKI.Controllers
 
         public ActionResult Shop()
         {
-            ViewBag.Message = "Award Points";
+
+            ViewBag.Message = "Shop";
 
             return View();
         }
 
         public ActionResult HallOfFame()
         {
-            ViewBag.Message = "Award Points";
+
+            ViewBag.Message = "Hall of Fame";
 
             return View();
         }
 
         public ActionResult SearchEmployee()
         {
-            ViewBag.Message = "Award Points";
+
+            ViewBag.Message = "Search an employee";
 
             return View();
         }
 
         public ActionResult Notifications()
         {
-            ViewBag.Message = "Award Points";
+
+            ViewBag.Message = "Your Notifications!";
 
             return View();
         }
