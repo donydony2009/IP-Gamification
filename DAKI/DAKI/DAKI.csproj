@@ -301,11 +301,14 @@
     <Content Include="Views\Account\Shop.cshtml" />
     <Content Include="Views\Account\AwardPoints.cshtml" />
     <Content Include="Views\Account\Notifications.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Admin\CreatePrize.cshtml" />
     <Content Include="Views\Admin\ListPrizes.cshtml" />
     <Content Include="Views\Admin\DetailsPrize.cshtml" />
     <Content Include="Views\Admin\EditPrize.cshtml" />
     <Content Include="Views\Admin\DeletePrize.cshtml" />
+=======
+>>>>>>> Andreea
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

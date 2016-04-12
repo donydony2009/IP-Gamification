@@ -57,8 +57,13 @@ namespace DAKI.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
+<<<<<<< HEAD
             
             return RedirectToAction("Login", "Account");
+=======
+
+            return RedirectToAction("Index");
+>>>>>>> Andreea
         }
 
         //
@@ -357,28 +362,44 @@ namespace DAKI.Controllers
 
         public ActionResult Shop()
         {
+<<<<<<< HEAD
             ViewBag.Message = "Award Points";
+=======
+            ViewBag.Message = "Shop";
+>>>>>>> Andreea
 
             return View();
         }
 
         public ActionResult HallOfFame()
         {
+<<<<<<< HEAD
             ViewBag.Message = "Award Points";
+=======
+            ViewBag.Message = "Hall of Fame";
+>>>>>>> Andreea
 
             return View();
         }
 
         public ActionResult SearchEmployee()
         {
+<<<<<<< HEAD
             ViewBag.Message = "Award Points";
+=======
+            ViewBag.Message = "Search an employee";
+>>>>>>> Andreea
 
             return View();
         }
 
         public ActionResult Notifications()
         {
+<<<<<<< HEAD
             ViewBag.Message = "Award Points";
+=======
+            ViewBag.Message = "Your Notifications!";
+>>>>>>> Andreea
 
             return View();
         }
