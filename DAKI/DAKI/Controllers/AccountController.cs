@@ -57,7 +57,7 @@ namespace DAKI.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
+            
             return RedirectToAction("Login", "Account");
         }
 
@@ -348,6 +348,40 @@ namespace DAKI.Controllers
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
+        public ActionResult AwardPoints()
+        {
+            ViewBag.Message = "Award Points";
+
+            return View();
+        }
+
+        public ActionResult Shop()
+        {
+            ViewBag.Message = "Award Points";
+
+            return View();
+        }
+
+        public ActionResult HallOfFame()
+        {
+            ViewBag.Message = "Award Points";
+
+            return View();
+        }
+
+        public ActionResult SearchEmployee()
+        {
+            ViewBag.Message = "Award Points";
+
+            return View();
+        }
+
+        public ActionResult Notifications()
+        {
+            ViewBag.Message = "Award Points";
+
+            return View();
+        }
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
