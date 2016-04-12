@@ -349,28 +349,28 @@ namespace DAKI.Controllers
 
         public ActionResult Shop()
         {
-            ViewBag.Message = "Award Points";
+            ViewBag.Message = "Shop";
 
             return View();
         }
 
         public ActionResult HallOfFame()
         {
-            ViewBag.Message = "Award Points";
+            ViewBag.Message = "Hall of Fame";
 
             return View();
         }
 
         public ActionResult SearchEmployee()
         {
-            ViewBag.Message = "Award Points";
+            ViewBag.Message = "Search an employee";
 
             return View();
         }
 
         public ActionResult Notifications()
         {
-            ViewBag.Message = "Award Points";
+            ViewBag.Message = "Your Notifications!";
 
             return View();
         }

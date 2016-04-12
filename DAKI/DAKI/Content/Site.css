@@ -101,7 +101,9 @@ h5, h6 {
     margin: 0 auto;
     max-width: 1200px;
 }
-    .content-wrapper p {
+    .content-wrapper p,
+    .content-wrapper fieldset,
+    .content-wrapper h3 {
         padding-left: 30px;
         padding-right: 30px;
     }
@@ -131,7 +133,59 @@ footer {
     height: 100px;
 }
 
+/*Shop layout*/
+div#filter {
+    float:left;
+    display:inline-block;
+    margin-left:20px;
+    width: 27%;
+    background-color : #e4f3f8;
+    padding-left: 10px;
+}
 
+    div#filter p {
+        padding:0;
+    }
+#SearchString {
+    width:200px;
+
+}
+div#filter input[type="submit"] {
+    height:33px;
+    border-style: none;
+    background: none;
+}
+div#filter input[type="submit"]:hover {
+    color: #1b9bff;
+}
+
+div#products {
+    display: inline-block;
+    margin-left:20px;
+    width:66%;
+    
+    /*padding:5px;*/
+}
+
+    div#products table, tr {
+        border-color: #a6dbed;
+        border-style: solid;
+    }
+    div#products table {
+        width:100%;
+        border-collapse: collapse;
+        
+        margin-top:0;
+    }
+    div#products td{
+        border-color: #a6dbed;
+        border:  3px solid #a6dbed;
+        height: 100px;
+        width:30%;
+        text-align: center;
+        padding: 5px;
+        padding-bottom:15px;
+    }
 /* site title
 ----------------------------------------------------------*/
 .site-title {
@@ -393,6 +447,7 @@ aside {
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
+    text-align:center;
     width: 30%;
 }
     .loginForm label {
@@ -400,6 +455,10 @@ aside {
     }
 
     .loginForm p {
+        text-align:center;
+    }
+
+    .loginForm h1 {
         text-align:center;
     }
 
@@ -419,13 +478,14 @@ aside {
         margin: 0;
     }
 
-    .loginForm input {
-        width: 100%;
+    .loginForm input,
+    .loginForm input[type="button"] {
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         border-color: #c1bcae;
+
     }
 
     .loginForm input[type="checkbox"],
@@ -519,14 +579,16 @@ textarea {
     input[type="submit"],
     input[type="button"],
     button {
-        background-color: #d3dce0;
-        border: 1px solid #787878;
         cursor: pointer;
         font-size: 1.2em;
         font-weight: 600;
-        padding: 7px;
-        margin-right: 8px;
         width: auto;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background-color: #ffd245;
+        border-color: #fff8e0;
     }
 
     td input[type="submit"],
