@@ -10,7 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using DAKI.Filters;
 using DAKI.Models;
-
+using DAKI.App_Data;
 namespace DAKI.Controllers
 {
     [Authorize]
@@ -89,7 +89,8 @@ namespace DAKI.Controllers
                     {
                         if (context.Database.Exists())
                         {
-                            context.UserProfiles.First<UserProfile>(e => e.UserName == model.UserName).Email = model.Email;
+                           var x = context.UserProfiles.FirstOrDefault(e => e.UserName == model.UserName);
+                            x.Email = model.Email;
                             context.SaveChanges();
                         }
                     }
