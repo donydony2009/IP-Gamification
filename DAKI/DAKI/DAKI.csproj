@@ -163,6 +163,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Default1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -292,10 +293,20 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\_NoPermissionsPartial.cshtml" />
-    <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
+    <Content Include="Views\Admin\NoPermissions.cshtml" />
     <Content Include="Views\Admin\RoleManagement.cshtml" />
     <Content Include="Views\Account\View1.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Account\SearchEmployee.cshtml" />
+    <Content Include="Views\Account\HallOfFame.cshtml" />
+    <Content Include="Views\Account\Shop.cshtml" />
+    <Content Include="Views\Account\AwardPoints.cshtml" />
+    <Content Include="Views\Account\Notifications.cshtml" />
+    <Content Include="Views\Admin\CreatePrize.cshtml" />
+    <Content Include="Views\Admin\ListPrizes.cshtml" />
+    <Content Include="Views\Admin\DetailsPrize.cshtml" />
+    <Content Include="Views\Admin\EditPrize.cshtml" />
+    <Content Include="Views\Admin\DeletePrize.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
