@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<DAKI.Models.Prize>
-
+@section featured {
+<section class="featured">
+        <div class="content-wrapper">
 <p>
     @Html.ActionLink("Create New", "CreatePrize")
 </p>
@@ -41,5 +43,12 @@
         </td>
     </tr>
 }
-
+    </div>
 </table>
+
+</section>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

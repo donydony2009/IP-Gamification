@@ -2,12 +2,12 @@
 @{
     ViewBag.Title = "Role Management";
 }
-
+@section featured {
+<section class="featured">
+    <div class="content-wrapper">
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
-
-<section id="loginForm">
 
 @Html.ValidationMessage("userNotFound")
 <fieldset>
@@ -19,7 +19,7 @@
         </li>
     </ol>
 </fieldset>
-<button type="button" onclick="AddUsernameToQuery()">Select</button>
+<button type="button" onclick="AddUsernameToQuery()" style="margin-left:30px">Select</button>
 <br />
 @if(Model != null && Model.UserName != null)
 {
@@ -72,9 +72,9 @@
         <input type="submit" value="Grant Role" />
     </fieldset>
 }
-    
-
+     </div>
 </section>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

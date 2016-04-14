@@ -57,9 +57,8 @@ namespace DAKI.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
+            
             return RedirectToAction("Login", "Account");
-
         }
 
         //
@@ -382,7 +381,7 @@ namespace DAKI.Controllers
 
         public ActionResult Notifications()
         {
-            
+
             ViewBag.Message = "Your Notifications!";
 
             return View();

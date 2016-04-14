@@ -11,6 +11,7 @@ namespace DAKI.Controllers
     {
         public ActionResult Index()
         {
+
             if (!WebSecurity.IsAuthenticated)
             {
                 return RedirectToAction("Login", "Account");
