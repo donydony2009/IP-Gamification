@@ -19,15 +19,25 @@
                  <div class="float-left" id="nav-bar">
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")
-                                <ul>
-                                    <li>@Html.ActionLink("Mock1", "Contact", "Home")</li>
-                                    <li>@Html.ActionLink("Mock2", "Contact", "Home")</li>
-                                </ul>
-                            </li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <span class="float-right">@Html.Partial("_LoginPartial")</span>
+                            <li>@Html.ActionLink("Search Employee", "SearchEmployee", "Account")</li>
+                            <li>@Html.ActionLink("Hall of Fame", "HallOfFame", "Account")</li>
+                            <li>@Html.ActionLink("Shop", "Shop", "Account")</li>
+                            @if(User.IsInRole(Types.Role.Admin))
+                            {
+                                <li>@Html.ActionLink("Manage Roles", "RoleManagement", "Admin")</li>
+<<<<<<< HEAD
+                                <li>@Html.ActionLink("Manage Shop", "ListPrizes", "Admin")</li>
+=======
+>>>>>>> Andreea
+                            }
+                            @if(User.IsInRole(Types.Role.Advanced))
+                            {
+                                <li>@Html.ActionLink("Award Points", "AwardPoints", "Account")</li>
+                            }
+                            <span class="float-right">
+                                <li>@Html.ActionLink("Notifications", "Notifications", "Account")</li>
+                                @Html.Partial("_LoginPartial")
+                            </span>
                         </ul>
                         
                     </nav>

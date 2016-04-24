@@ -372,15 +372,31 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\_NoPermissionsPartial.cshtml" />
-    <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
+    <Content Include="Views\Admin\NoPermissions.cshtml" />
     <Content Include="Views\Admin\RoleManagement.cshtml" />
     <Content Include="Views\Account\View1.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Treeview.cshtml" />
     <Content Include="Views\DepTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+=======
+    <Content Include="Views\Account\SearchEmployee.cshtml" />
+    <Content Include="Views\Account\HallOfFame.cshtml" />
+    <Content Include="Views\Account\Shop.cshtml" />
+    <Content Include="Views\Account\AwardPoints.cshtml" />
+    <Content Include="Views\Account\Notifications.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\Admin\CreatePrize.cshtml" />
+    <Content Include="Views\Admin\ListPrizes.cshtml" />
+    <Content Include="Views\Admin\DetailsPrize.cshtml" />
+    <Content Include="Views\Admin\EditPrize.cshtml" />
+    <Content Include="Views\Admin\DeletePrize.cshtml" />
+=======
+>>>>>>> Andreea
+>>>>>>> refs/remotes/origin/master
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -11,11 +11,15 @@ namespace DAKI.Controllers
     {
         public ActionResult Index()
         {
+<<<<<<< HEAD
             if (!WebSecurity.IsAuthenticated)
             {
                 return RedirectToAction("Login", "Account");
             }
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+=======
+            ViewBag.Message = "";
+>>>>>>> Andreea
 
             return View();
         }
@@ -41,5 +45,7 @@ namespace DAKI.Controllers
 
             return View();
         }
+
+        
     }
 }

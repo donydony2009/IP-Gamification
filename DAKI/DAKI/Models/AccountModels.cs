@@ -18,6 +18,8 @@ namespace DAKI.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserBuysPrize> UserBuysPrize { get; set; }
+        public DbSet<Prize> Prizes { get; set; }
     }
 
     //[Table("UserProfile")]
@@ -29,6 +31,29 @@ namespace DAKI.Models
     //    public string UserName { get; set; }
     //    public string Email { get; set; }
     //}
+
+    [Table("UserBuysPrize")]
+    public class UserBuysPrize
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int TransactionId { get; set; }
+        public int UserId { get; set; }
+        public int PrizeId { get; set; }
+        public DateTime Date { get; set; }
+    }
+
+    [Table("Prize")]
+    public class Prize
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int PrizeId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int Cost { get; set; }
+        public int Limit { get; set; }
+    }
 
     public class RegisterExternalLoginModel
     {

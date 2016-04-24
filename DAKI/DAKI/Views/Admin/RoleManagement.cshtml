@@ -8,76 +8,72 @@
 </hgroup>
 
 <section id="loginForm">
-@if(!User.IsInRole(Types.Role.Admin))
+
+@Html.ValidationMessage("userNotFound")
+<fieldset>
+    <legend></legend>
+    <ol>
+        <li>
+            @Html.LabelFor(m => m.UserName)
+            @Html.TextBox("username")
+        </li>
+    </ol>
+</fieldset>
+<button type="button" onclick="AddUsernameToQuery()">Select</button>
+<br />
+@if(Model != null && Model.UserName != null)
 {
-    @Html.Partial("_NoPermissionsPartial");
+    <br />
+    <div>Roles for the user <b>@Model.UserName</b></div>
+    @Html.ValidationMessage("removeRoleError");
+    <table>
+    @if(Model != null && Model.UserName != null)
+    {
+        foreach (var role in Roles.GetRolesForUser(Model.UserName))
+        {
+            <tr><td>@role</td>
+            <td>
+            @using (Html.BeginForm("RoleManagement", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }))
+            {
+                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.Hidden("Username", Model.UserName);
+                <input id="Role" name="Role" type="hidden" value="@role">
+                <input type="submit" value="Remove" />
+            }
+            </td>
+            </tr>
+        }
+    }
+    </table>
 }
-else
+@Html.ValidationMessage("grantRoleError")
+@using (Html.BeginForm("RoleManagement", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }))
 {
-    @Html.ValidationMessage("userNotFound");
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
     <fieldset>
-        <legend></legend>
+        <legend>GrantRole</legend>
         <ol>
+            @Html.Hidden("UserName", Model.UserName)
             <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBox("username")
+                @Html.Label("Role")
+                @{
+                    List<SelectListItem> items = new List<SelectListItem>();
+                    foreach(var role in Roles.GetAllRoles())
+                    {
+                        items.Add(new SelectListItem { Text = role, Value = role});
+                    }
+                }
+                @Html.DropDownList("Role", items)
             </li>
         </ol>
+        <input type="submit" value="Grant Role" />
     </fieldset>
-    <button type="button" onclick="AddUsernameToQuery()">Select</button>
-    <br />
-    if(Model != null && Model.UserName != null)
-    {
-        <br />
-        <div>Roles for the user <b>@Model.UserName</b></div>
-        @Html.ValidationMessage("removeRoleError");
-        <table>
-        @if(Model != null && Model.UserName != null)
-        {
-            foreach (var role in Roles.GetRolesForUser(Model.UserName))
-            {
-                <tr><td>@role</td>
-                <td>
-                @using (Html.BeginForm("RoleManagement/remove", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
-                    @Html.Hidden("Username", Model.UserName);
-                    @Html.Hidden("Role", role);
-                    <input type="submit" value="Remove" />
-                }
-                </td>
-                </tr>
-            }
-        }
-        </table>
-    }
-    @Html.ValidationMessage("grantRoleError");
-    using (Html.BeginForm("RoleManagement/add", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        <fieldset>
-            <legend>GrantRole</legend>
-            <ol>
-                @Html.Hidden("UserName", Model.UserName)
-                <li>
-                    @Html.Label("Role")
-                    @{
-                     List<SelectListItem> items = new List<SelectListItem>();
-                     foreach(var role in Roles.GetAllRoles())
-                     {
-                           items.Add(new SelectListItem { Text = role, Value = role});
-                     }
-                    }
-                    @Html.DropDownList("Role", items)
-                </li>
-            </ol>
-            <input type="submit" value="Grant Role" />
-        </fieldset>
-    }
-    
 }
+    
+
 </section>
 
 @section Scripts {
