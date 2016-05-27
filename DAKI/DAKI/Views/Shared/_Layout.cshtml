@@ -16,7 +16,7 @@
                 <div class="float-left title-line">
                     <p class="site-title">@Html.ActionLink("DAKI", "Index", "Home")</p>
                 </div>
-                 <div class="float-left" id="nav-bar">
+                <div class="float-left" id="nav-bar">
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Search Employee", "SearchEmployee", "Account")</li>
@@ -28,27 +28,31 @@
                                 <li>@Html.ActionLink("Manage Shop", "ListPrizes", "Admin")</li>
 
                             }
-                            @if(User.IsInRole(Types.Role.Advanced))
+                            @if(User.IsInRole(Types.Role.Admin))
                             {
-                                <li>@Html.ActionLink("Award Points", "AwardPoints", "Account")</li>
+                                <li>@Html.ActionLink("Award Points", "ListUsersPoints", "Account")</li>
                             }
                             <span class="float-right">
                                 <li>@Html.ActionLink("Notifications", "Notifications", "Account")</li>
                                 @Html.Partial("_LoginPartial")
                             </span>
                         </ul>
-                        
                     </nav>
                 </div>
-                
             </div>
         </header>
+
         <div id="body">
-            @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
+                <section class="featured">
+                    <div class="content-wrapper">
+                        @RenderSection("featured", required: false)
+                        @RenderBody()
+                    </div>
+                </section>
             </section>
         </div>
+
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">

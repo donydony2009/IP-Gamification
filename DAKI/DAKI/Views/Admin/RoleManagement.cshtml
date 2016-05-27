@@ -2,9 +2,10 @@
 @{
     ViewBag.Title = "Role Management";
 }
-@section featured {
-<section class="featured">
-    <div class="content-wrapper">
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
@@ -71,11 +72,4 @@
         </ol>
         <input type="submit" value="Grant Role" />
     </fieldset>
-}
-     </div>
-</section>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

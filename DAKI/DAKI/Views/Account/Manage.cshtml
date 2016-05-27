@@ -3,27 +3,21 @@
     ViewBag.Title = "Manage Account";
 }
 
-@section featured {
-<section class="featured">
-    <div class="content-wrapper">
-        <hgroup class="title">
-            <h1>@ViewBag.Title</h1>
-        </hgroup>
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
 
-        <p class="message-success">@ViewBag.StatusMessage</p>
+<p class="message-success">@ViewBag.StatusMessage</p>
 
-        <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
 
-        @if (ViewBag.HasLocalPassword)
-        {
-            @Html.Partial("_ChangePasswordPartial")
-        }
-        else
-        { 
-            @Html.Partial("_SetPasswordPartial")
-        }
-    </div>
-</section>
+@if (ViewBag.HasLocalPassword)
+{
+    @Html.Partial("_ChangePasswordPartial")
+}
+else
+{ 
+    @Html.Partial("_SetPasswordPartial")
 }
 
 @section Scripts {

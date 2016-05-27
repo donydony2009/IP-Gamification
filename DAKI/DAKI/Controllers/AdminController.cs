@@ -232,7 +232,7 @@ namespace DAKI.Controllers
         }
 
         //
-        // GET: /Admin/EditPrize/5
+        // GET: /Admin/EditPrize
 
         public ActionResult EditPrize(int id = 0)
         {
@@ -250,7 +250,7 @@ namespace DAKI.Controllers
         }
 
         //
-        // POST: /Admin/EditPrize/5
+        // POST: /Admin/EditPrize
 
         [HttpPost]
         public ActionResult EditPrize(Prize prize)

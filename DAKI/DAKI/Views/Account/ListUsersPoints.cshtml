@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DAKI.Models.UserProfile>
+@{
+    ViewBag.Title = "Award Points";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<div class="datagrid">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Username
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Points)
+                </th>
+                <th>
+                    Award Points
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Points)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Add Points", "AwardPoints", new { id=item.UserId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
