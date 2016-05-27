@@ -308,6 +308,9 @@
     <Content Include="Views\Admin\EditPrize.cshtml" />
     <Content Include="Views\Admin\DeletePrize.cshtml" />
     <Content Include="Views\Account\ListUsersPoints.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\Badges.cshtml" />
+    <Content Include="Views\Account\Progress.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
