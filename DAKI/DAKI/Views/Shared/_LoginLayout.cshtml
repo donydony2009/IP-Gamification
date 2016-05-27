@@ -12,9 +12,13 @@
     </head>
     <body>
         <div id="body">
-            @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
+                <section class="featured">
+                    <div class="content-wrapper">
+                        @RenderSection("featured", required: false)
+                        @RenderBody()
+                    </div>
+                </section>
             </section>
         </div>
         @Scripts.Render("~/bundles/jquery")

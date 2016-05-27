@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using DAKI.Filters;
 using DAKI.Models;
+using System.Data;
 
 namespace DAKI.Controllers
 {
@@ -17,6 +18,7 @@ namespace DAKI.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private UsersContext db = new UsersContext();
         //
         // GET: /Account/Login
 
@@ -57,8 +59,8 @@ namespace DAKI.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
-            return RedirectToAction("Index");
+            
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -119,7 +121,7 @@ namespace DAKI.Controllers
             if (ownerAccount == User.Identity.Name)
             {
                 // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.Serializable }))
                 {
                     bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
@@ -139,6 +141,10 @@ namespace DAKI.Controllers
 
         public ActionResult Manage(ManageMessageId? message)
         {
+            if (!WebSecurity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -156,6 +162,10 @@ namespace DAKI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
+            if (!WebSecurity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
@@ -340,37 +350,81 @@ namespace DAKI.Controllers
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
-        public ActionResult AwardPoints()
+        //GET: /Account/ListUsersPoints
+        [HttpGet]
+        public ActionResult ListUsersPoints()
         {
-            ViewBag.Message = "Award Points";
-
-            return View();
+            return View(db.UserProfiles.ToList());
         }
+
+        //
+        // GET: /Account/AwardPoints
+
+        public ActionResult AwardPoints(int id = 0)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            UserProfile user = db.UserProfiles.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        //
+        // POST: /Account/AwardPoints
+
+        [HttpPost]
+        public ActionResult AwardPoints(UserProfile user, int val=0)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            if (ModelState.IsValid)
+            {
+                user.Points = user.Points + val;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ListUsersPoints");
+            }
+            return View(user);
+        }
+
 
         public ActionResult Shop()
         {
-            ViewBag.Message = "Award Points";
+
+            ViewBag.Message = "Shop";
 
             return View();
         }
 
         public ActionResult HallOfFame()
         {
-            ViewBag.Message = "Award Points";
+
+            ViewBag.Message = "Hall of Fame";
 
             return View();
         }
 
         public ActionResult SearchEmployee()
         {
-            ViewBag.Message = "Award Points";
+
+            ViewBag.Message = "Search an employee";
 
             return View();
         }
 
         public ActionResult Notifications()
         {
-            ViewBag.Message = "Award Points";
+
+            ViewBag.Message = "Your Notifications!";
 
             return View();
         }
