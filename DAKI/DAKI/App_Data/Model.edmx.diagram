@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="42c8513ae7d8429183d4d7ae549c1f5b" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Achievement" Width="1.5" PointX="3.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Badge" Width="1.5" PointX="3.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Department" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Person" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PersonHasJobInDep" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Prize" Width="1.5" PointX="6" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserBuysPrize" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.webpages_Mebership" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.webpages_Roles" Width="1.5" PointX="8.25" PointY="11.25" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Department_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PersonHasJobInDep_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PersonHasJobInDep_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PersonHasJobInDep_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_UserProfile_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_UserBuysPrize_Prize" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_UserBuysPrize_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_webpages_Mebership_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UserHasAchievement" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UserHasBadge" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.webpages_UserInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

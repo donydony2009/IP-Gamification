@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Achievement">
+    <Key>
+      <PropertyRef Name="AchievementId" />
+    </Key>
+    <Property Name="AchievementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="ImageURL" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="Points" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserProfiles" Relationship="Self.UserHasAchievement" FromRole="Achievement" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="Badge">
+    <Key>
+      <PropertyRef Name="BadgeId" />
+    </Key>
+    <Property Name="BadgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NecessaryPoints" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserProfiles" Relationship="Self.UserHasBadge" FromRole="Badge" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="Rules" Type="Boolean" />
+    <NavigationProperty Name="Children" Relationship="Self.FK_Department_Department" FromRole="Department" ToRole="Department1" />
+    <NavigationProperty Name="Parent" Relationship="Self.FK_Department_Department" FromRole="Department1" ToRole="Department" />
+    <NavigationProperty Name="PersonHasJobInDeps" Relationship="Self.FK_PersonHasJobInDep_Department" FromRole="Department" ToRole="PersonHasJobInDep" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Manages" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PersonHasJobInDeps" Relationship="Self.FK_PersonHasJobInDep_Job" FromRole="Job" ToRole="PersonHasJobInDep" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonId" />
+    </Key>
+    <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PersonHasJobInDeps" Relationship="Self.FK_PersonHasJobInDep_Person" FromRole="Person" ToRole="PersonHasJobInDep" />
+    <NavigationProperty Name="UserProfiles" Relationship="Self.FK_UserProfile_Person" FromRole="Person" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="PersonHasJobInDep">
+    <Key>
+      <PropertyRef Name="PersonId" />
+      <PropertyRef Name="JobId" />
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="PersonId" Type="Int32" Nullable="false" />
+    <Property Name="JobId" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="StartingDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Salary" Type="Int32" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_PersonHasJobInDep_Department" FromRole="PersonHasJobInDep" ToRole="Department" />
+    <NavigationProperty Name="Job" Relationship="Self.FK_PersonHasJobInDep_Job" FromRole="PersonHasJobInDep" ToRole="Job" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_PersonHasJobInDep_Person" FromRole="PersonHasJobInDep" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Prize">
+    <Key>
+      <PropertyRef Name="PrizeId" />
+    </Key>
+    <Property Name="PrizeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Cost" Type="Int32" Nullable="false" />
+    <Property Name="Limit" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserBuysPrizes" Relationship="Self.FK_UserBuysPrize_Prize" FromRole="Prize" ToRole="UserBuysPrize" />
+  </EntityType>
+  <EntityType Name="UserBuysPrize">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="PrizeId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="PrizeId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Prize" Relationship="Self.FK_UserBuysPrize_Prize" FromRole="UserBuysPrize" ToRole="Prize" />
+    <NavigationProperty Name="UserProfile" Relationship="Self.FK_UserBuysPrize_UserProfile" FromRole="UserBuysPrize" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CurrentPoints" Type="Int32" Nullable="false" />
+    <Property Name="Points" Type="Int32" Nullable="false" />
+    <Property Name="PersonId" Type="Int32" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_UserProfile_Person" FromRole="UserProfile" ToRole="Person" />
+    <NavigationProperty Name="UserBuysPrizes" Relationship="Self.FK_UserBuysPrize_UserProfile" FromRole="UserProfile" ToRole="UserBuysPrize" />
+    <NavigationProperty Name="webpages_Mebership" Relationship="Self.FK_webpages_Mebership_UserProfile" FromRole="UserProfile" ToRole="webpages_Mebership" />
+    <NavigationProperty Name="Achievements" Relationship="Self.UserHasAchievement" FromRole="UserProfile" ToRole="Achievement" />
+    <NavigationProperty Name="Badges" Relationship="Self.UserHasBadge" FromRole="UserProfile" ToRole="Badge" />
+    <NavigationProperty Name="webpages_Roles" Relationship="Self.webpages_UserInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+  </EntityType>
+  <EntityType Name="webpages_Mebership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" />
+    <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserProfile" Relationship="Self.FK_webpages_Mebership_UserProfile" FromRole="webpages_Mebership" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UserProfiles" Relationship="Self.webpages_UserInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+  </EntityType>
+  <Association Name="FK_Department_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Department1" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Department1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonHasJobInDep_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PersonHasJobInDep" Type="Self.PersonHasJobInDep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="PersonHasJobInDep">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonHasJobInDep_Job">
+    <End Role="Job" Type="Self.Job" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PersonHasJobInDep" Type="Self.PersonHasJobInDep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="PersonHasJobInDep">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonHasJobInDep_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PersonHasJobInDep" Type="Self.PersonHasJobInDep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="PersonHasJobInDep">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfile_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserBuysPrize_Prize">
+    <End Role="Prize" Type="Self.Prize" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserBuysPrize" Type="Self.UserBuysPrize" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prize">
+        <PropertyRef Name="PrizeId" />
+      </Principal>
+      <Dependent Role="UserBuysPrize">
+        <PropertyRef Name="PrizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserBuysPrize_UserProfile">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserBuysPrize" Type="Self.UserBuysPrize" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserBuysPrize">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_webpages_Mebership_UserProfile">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="webpages_Mebership" Type="Self.webpages_Mebership" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="webpages_Mebership">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserHasAchievement">
+    <End Role="Achievement" Type="Self.Achievement" Multiplicity="*" />
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+  </Association>
+  <Association Name="UserHasBadge">
+    <End Role="Badge" Type="Self.Badge" Multiplicity="*" />
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+  </Association>
+  <Association Name="webpages_UserInRoles">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+    <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Achievements" EntityType="Self.Achievement" />
+    <EntitySet Name="Badges" EntityType="Self.Badge" />
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Jobs" EntityType="Self.Job" />
+    <EntitySet Name="People" EntityType="Self.Person" />
+    <EntitySet Name="PersonHasJobInDeps" EntityType="Self.PersonHasJobInDep" />
+    <EntitySet Name="Prizes" EntityType="Self.Prize" />
+    <EntitySet Name="UserBuysPrizes" EntityType="Self.UserBuysPrize" />
+    <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+    <EntitySet Name="webpages_Mebership" EntityType="Self.webpages_Mebership" />
+    <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
+    <AssociationSet Name="FK_Department_Department" Association="Self.FK_Department_Department">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Department1" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonHasJobInDep_Department" Association="Self.FK_PersonHasJobInDep_Department">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="PersonHasJobInDep" EntitySet="PersonHasJobInDeps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonHasJobInDep_Job" Association="Self.FK_PersonHasJobInDep_Job">
+      <End Role="Job" EntitySet="Jobs" />
+      <End Role="PersonHasJobInDep" EntitySet="PersonHasJobInDeps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonHasJobInDep_Person" Association="Self.FK_PersonHasJobInDep_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonHasJobInDep" EntitySet="PersonHasJobInDeps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfile_Person" Association="Self.FK_UserProfile_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserBuysPrize_Prize" Association="Self.FK_UserBuysPrize_Prize">
+      <End Role="Prize" EntitySet="Prizes" />
+      <End Role="UserBuysPrize" EntitySet="UserBuysPrizes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserBuysPrize_UserProfile" Association="Self.FK_UserBuysPrize_UserProfile">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="UserBuysPrize" EntitySet="UserBuysPrizes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_webpages_Mebership_UserProfile" Association="Self.FK_webpages_Mebership_UserProfile">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="webpages_Mebership" EntitySet="webpages_Mebership" />
+    </AssociationSet>
+    <AssociationSet Name="UserHasAchievement" Association="Self.UserHasAchievement">
+      <End Role="Achievement" EntitySet="Achievements" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="UserHasBadge" Association="Self.UserHasBadge">
+      <End Role="Badge" EntitySet="Badges" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="webpages_UserInRoles" Association="Self.webpages_UserInRoles">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
