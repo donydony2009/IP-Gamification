@@ -33,7 +33,7 @@ namespace DAKI.Models
         public int Points { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string BirthDate { get; set; }
+        public Nullable  <DateTime> BirthDate { get; set; }
         public string Address { get; set; }
 
     }
