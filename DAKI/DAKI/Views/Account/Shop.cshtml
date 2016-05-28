@@ -1,5 +1,60 @@
-﻿@{
+﻿@model DAKI.Models.ShopModel
+@{
     ViewBag.Title = "Shop";
 }
 
-<h2>Shop</h2>
+<p class="float-right"><b>@Model.CurrentPoints points</b></p>
+<hgroup class="title">
+    <h1>Shop</h1>
+</hgroup>
+<br />
+<div id="filter">
+        @using (Html.BeginForm()){    
+        <p>@Html.TextBox("SearchString")  
+        <input type="submit" value="Search" /></p> 
+    } 
+    <h2>Categories:</h2>
+    <ul>
+        <li>@Html.ActionLink("Goods", "Goods", "Account")</li>
+        <li>@Html.ActionLink("Free Time", "FreeTime", "Account")</li>
+    </ul>
+</div>
+<div id="products">
+    <table>
+        <tr>
+        @{
+            int i = 0;
+            foreach(var item in Model.Prizes)
+            {
+                
+                if (i % 3 == 0 && i != 0)
+                {
+                    @:</tr>
+                    @:<tr>
+                }
+                i++;
+                @:<td><h2>@item.Name</h2><br />Cost: @item.Cost <br /> @item.Limit Available<br /><br />
+                if(item.Limit != 0)
+                {
+                    using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) 
+                    {
+                        @:@Html.AntiForgeryToken()
+                        @:@Html.ValidationSummary(true)
+                        @:@Html.Hidden("PrizeId", item.PrizeId)
+                        @:<button>Buy</button>
+                    }
+                }
+                else
+                {
+                    @:<button disabled>No Stock</button>   
+                }
+                
+           }
+        }
+         </tr>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

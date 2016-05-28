@@ -101,7 +101,9 @@ h5, h6 {
     margin: 0 auto;
     max-width: 1200px;
 }
-    .content-wrapper p {
+    .content-wrapper p,
+    .content-wrapper fieldset,
+    .content-wrapper h3 {
         padding-left: 30px;
         padding-right: 30px;
     }
@@ -130,8 +132,99 @@ footer {
     font-size: .8em;
     height: 100px;
 }
+/*Profile Layout*/
+.profile {
+    padding-left: 30px;
+    display: block;
+}
 
+.profileMenu {
+    height: 100%;
+    width:20%;
+    float: left;
+}
+.profileMenu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #333;
+}
 
+.profileMenu li a {
+    display: block;
+    color: white;
+    padding: 16px 20px;
+    text-decoration: none;
+    line-height: 150%;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Change the link color on hover */
+.profileMenu li a:hover {
+    background-color: #1b9bff;
+    color: white;
+}
+
+.active {
+    background-color: #1b9bff;
+    color: white;
+}
+
+/*Shop layout*/
+div#filter {
+    float:left;
+    display:inline-block;
+    margin-left:20px;
+    width: 27%;
+    background-color : #e4f3f8;
+    padding-left: 10px;
+}
+
+    div#filter p {
+        padding:0;
+    }
+#SearchString {
+    width:200px;
+
+}
+div#filter input[type="submit"] {
+    height:33px;
+    border-style: none;
+    background: none;
+}
+div#filter input[type="submit"]:hover {
+    color: #1b9bff;
+}
+
+div#products {
+    display: inline-block;
+    margin-left:20px;
+    width:66%;
+    
+    /*padding:5px;*/
+}
+
+    div#products table, tr {
+        border-color: #a6dbed;
+        border-style: solid;
+    }
+    div#products table {
+        width:100%;
+        border-collapse: collapse;
+        
+        margin-top:0;
+    }
+    div#products td{
+        border-color: #a6dbed;
+        border:  3px solid #a6dbed;
+        height: 100px;
+        width:30%;
+        text-align: center;
+        padding: 5px;
+        padding-bottom:15px;
+    }
 /* site title
 ----------------------------------------------------------*/
 .site-title {
@@ -191,7 +284,6 @@ footer {
         border: 0;
         background: #333;
         border-bottom: 4px solid #1b9bff;
-        /*font-family: 'Oxygen Mono', Tahoma, Arial, sans-serif;*/
         font-size: 12px;
         width:100%;
     }
@@ -393,6 +485,7 @@ aside {
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
+    text-align:center;
     width: 30%;
 }
     .loginForm label {
@@ -400,6 +493,10 @@ aside {
     }
 
     .loginForm p {
+        text-align:center;
+    }
+
+    .loginForm h1 {
         text-align:center;
     }
 
@@ -419,13 +516,14 @@ aside {
         margin: 0;
     }
 
-    .loginForm input {
-        width: 100%;
+    .loginForm input,
+    .loginForm input[type="button"] {
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         border-color: #c1bcae;
+
     }
 
     .loginForm input[type="checkbox"],
@@ -491,7 +589,7 @@ label.checkbox {
     display: inline;
 }
 
-input, textarea {
+input, textarea, select {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;
@@ -519,14 +617,16 @@ textarea {
     input[type="submit"],
     input[type="button"],
     button {
-        background-color: #d3dce0;
-        border: 1px solid #787878;
         cursor: pointer;
         font-size: 1.2em;
         font-weight: 600;
-        padding: 7px;
-        margin-right: 8px;
         width: auto;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background-color: #ffd245;
+        border-color: #fff8e0;
     }
 
     td input[type="submit"],
@@ -594,7 +694,7 @@ input[type="checkbox"].input-validation-error {
 
 /* tables
 ----------------------------------------------------------*/
-table {
+/*table {
     border-collapse: collapse;
     border-spacing: 0;
     margin-top: 0.75em;
@@ -652,6 +752,44 @@ td {
 tr.pager td {
     padding: 0 0.25em 0 0;
 }
+*/
+/*Custom table*/
+.datagrid table { border-collapse: collapse; text-align: left; width: 100%; }
+.datagrid {background: #fff;
+           overflow: hidden;
+           border: 3px solid #1B9BFF;
+           -webkit-border-radius: 7px;
+           -moz-border-radius: 7px;
+           border-radius: 7px;
+           margin-left: 30px; margin-right: 30px;
+}
+.datagrid table td, .datagrid table th { padding: 14px 7px; }                                                                                                                                        
+
+.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1B9BFF), color-stop(1, #1B9BFF) );
+                          background:-moz-linear-gradient( center top, #1B9BFF 5%, #1B9BFF 100% );
+                          filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1B9BFF', endColorstr='#1B9BFF');
+                          background-color:#1B9BFF;
+                          color:#FFFFFF;
+                          font-size: 14px; font-weight: bold; border-left: 1px solid #0082e7; }
+.datagrid table thead th:first-child { border: none; }
+
+.datagrid table tbody td { color: #00557F;
+                           border-left: 1px solid #0082e7;
+                           font-size: 14px;
+                           border-bottom: 1px solid #0082e7;
+                           font-weight: normal; }
+.datagrid table tbody td:first-child { border-left: none; }
+.datagrid table tbody tr:last-child td { border-bottom: none; }
+.datagrid table tr { border: none; }
+
+.datagrid table tfoot td div { border-top: 1px solid #1B9BFF;background: #E1EEf4;}
+.datagrid table tfoot td { padding: 0; font-size: 12px }
+.datagrid table tfoot td div{ padding: 2px; }
+.datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }
+.datagrid table tfoot  li { display: inline; }
+.datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #FFFFFF;border: 1px solid #FFFFFF;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1B9BFF), color-stop(1, #1B9BFF) );background:-moz-linear-gradient( center top, #1B9BFF 5%, #1B9BFF 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1B9BFF', endColorstr='#1B9BFF');background-color:#1B9BFF; }
+.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #00557F; color: #FFFFFF; background: none; background-color:#006699;}
+div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
 
 
 /********************
@@ -828,5 +966,10 @@ tr.pager td {
     
     footer p {
         margin: 0;
+    }
+
+    display-label {
+        font-weight:bold;
+        font-size:15px;
     }
 }

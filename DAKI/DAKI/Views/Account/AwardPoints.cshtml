@@ -1,11 +1,54 @@
-﻿@{
-    ViewBag.Title = "AwardPoints";
+﻿@model DAKI.Models.UserProfile
+@{
+    ViewBag.Title = "Award Points";
 }
-
-<h2>AwardPoints</h2>
-<p>This page awards points</p>
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Award Points</legend>
+
+        @Html.HiddenFor(model => model.UserId)
+
+        <div class="editor-label">
+            <label>Username:</label>
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+        @Html.HiddenFor(model => model.Email)
+        @Html.HiddenFor(model => model.CurrentPoints)
+        <br />
+        <div class="editor-label">
+            <label>Type of reward</label>
+        </div>
+        <div class="editor-field">
+            @Html.ActionLink("10 Points for Minor task", "AwardPoints", new { val=10 })
+            <br />
+            @Html.ActionLink("50 Points for Medium task", "AwardPoints", new { val=50 })
+            <br />
+            @Html.ActionLink("100 Points for Major task", "AwardPoints", new { val=100 })
+            <br />
+            <label></label>
+            @Html.HiddenFor(model => model.Points)
+        </div>
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}
+
+<p>
+    @Html.ActionLink("Back to List", "ListUsersPoints")
+</p>

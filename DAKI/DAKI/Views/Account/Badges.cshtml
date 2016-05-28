@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Badges";
+}
+<div class="profileMenu">
+    <ul>
+        <li>@Html.ActionLink("Profile", "Profile", "Account")</li>
+        <li class="active">@Html.ActionLink("Badges", "Badges", "Account")</li>
+        <li>@Html.ActionLink("Progress", "Progress", "Account")</li>
+        <li>@Html.ActionLink("Manage", "Manage", "Account")</li>
+    </ul>
+</div>
+<div class="profile">
+    <hgroup class="title">
+        <h1>Username (rank)</h1>
+    </hgroup>
+    <p>FullName</p>
+    <p>Email</p>
+    <p>Address</p>
+    <p>Department</p>
+    <p>Job</p>
+</div>

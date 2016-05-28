@@ -168,6 +168,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
     <Compile Include="Models\Types.cs" />
@@ -292,7 +293,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\_NoPermissionsPartial.cshtml" />
-    <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
+    <Content Include="Views\Admin\NoPermissions.cshtml" />
     <Content Include="Views\Admin\RoleManagement.cshtml" />
     <Content Include="Views\Account\View1.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
@@ -301,6 +302,15 @@
     <Content Include="Views\Account\Shop.cshtml" />
     <Content Include="Views\Account\AwardPoints.cshtml" />
     <Content Include="Views\Account\Notifications.cshtml" />
+    <Content Include="Views\Admin\CreatePrize.cshtml" />
+    <Content Include="Views\Admin\ListPrizes.cshtml" />
+    <Content Include="Views\Admin\DetailsPrize.cshtml" />
+    <Content Include="Views\Admin\EditPrize.cshtml" />
+    <Content Include="Views\Admin\DeletePrize.cshtml" />
+    <Content Include="Views\Account\ListUsersPoints.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\Badges.cshtml" />
+    <Content Include="Views\Account\Progress.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -18,7 +18,12 @@ $RECYCLE.BIN/
 *.lnk
 
 # Visual Studio
+*.cache
+*.dll
+*.pdb
 *.suo
+DAKI/DAKI/obj/
+DAKI/DAKI/bin/
 
 # =========================
 # Operating System Files
@@ -48,6 +53,3 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-*.cache
-*.dll
-*.pdb
