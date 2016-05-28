@@ -320,6 +320,7 @@
     <Content Include="Views\Account\Progress.cshtml" />
     <Content Include="Views\Departments\Treeview.cshtml" />
     <Content Include="Views\Departments\DepTree.cshtml" />
+    <Content Include="Views\Departments\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605281613288_Nigger.resx">

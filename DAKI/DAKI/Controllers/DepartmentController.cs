@@ -3,25 +3,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using DAKI.Models;
 namespace DAKI.Controllers
 {
     public class DepartmentController : Controller
     {
+
         //
         // GET: /Department/
-
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
+        [HttpGet]
+        public string AddDepartments()
+        {
+            using (var ctx = new UsersContext())
+            {
+                ctx.Departments.Add(new Department()
+                {
+                    Title = "Test",
+                    Description = "Test stuff"
+                });
+                ctx.SaveChanges();
+                return "OK";
+            }
+        }
 
         //
         // GET: /Department/Details/5
-
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+                return new HttpNotFoundResult("Invalid department id!");
+
+            DepartmentModel model = null;
+            using (var ctx = new UsersContext())
+            {
+                var departament = ctx.Departments.FirstOrDefault(item => item.DepartmentId == id);
+                if (departament == null)
+                    return new HttpNotFoundResult("Department not found");
+                model = new DepartmentModel(departament);
+            }
+            return View(model);
         }
 
         //
@@ -29,77 +55,136 @@ namespace DAKI.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            DepartmentModel model = new DepartmentModel();
+            return View(model);
         }
 
         //
         // POST: /Department/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(DepartmentModel model)
         {
-            try
+            if (!ModelState.IsValid)
+                return View(model);
+            using (var ctx = new UsersContext())
             {
-                // TODO: Add insert logic here
+                var department = new Department()
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    ParentId = model.Parent,
+                    Rules = model.Rules
+                };
+                if (model.Children != null)
+                    foreach (var c in model.Children)
+                    {
+                        var child = ctx.Departments.FirstOrDefault(item => item.DepartmentId == c);
+                        child.ParentId = department.DepartmentId;
+                    }
+                //model.Children.Each(d => department.Children.Add(ctx.Departments.FirstOrDefault(item => item.ParentId == d)));
 
-                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
+
         }
 
-        //
-        // GET: /Department/Edit/5
-
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+                return new HttpNotFoundResult("Invalid department id.");
+            DepartmentModel model = null;
+            using (var ctx = new UsersContext())
+            {
+                var dep = ctx.Departments.FirstOrDefault(item => item.DepartmentId == id);
+                if (dep == null)
+                    return new HttpNotFoundResult("Department not found");
+                model = new DepartmentModel(dep);
+
+            }
+            return View(model);
         }
 
         //
         // POST: /Department/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(DepartmentModel model)
         {
-            try
+            if (!ModelState.IsValid)
+                return View(model);
+            using (var ctx = new UsersContext())
             {
-                // TODO: Add update logic here
+                var department = ctx.Departments.FirstOrDefault(item => item.DepartmentId == model.Id);
+                department.Title = model.Title;
+                department.Description = model.Description;
+                department.ParentId = model.Parent;
+                department.Rules = model.Rules;
 
-                return RedirectToAction("Index");
+                if (model.Children != null)
+                    foreach (var c in model.Children)
+                    {
+                        var child = ctx.Departments.FirstOrDefault(item => item.DepartmentId == c);
+                        child.ParentId = department.DepartmentId;
+                    }
+                //model.Children.Each(d => department.Children.Add(ctx.Departments.FirstOrDefault(item => item.ParentId == d)));
+
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
-        //
-        // GET: /Department/Delete/5
 
-        public ActionResult Delete(int id)
+        //[HttpGet]
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+                return new HttpNotFoundResult("Invalid department id.");
+            using (var ctx = new UsersContext())
+            {
+                var dep = ctx.Departments.FirstOrDefault(item => item.DepartmentId == id);
+                if (dep == null)
+                    return new HttpNotFoundResult("The department could not be found.");
+                dep.Children.Clear();
+                dep.PersonHasJobInDeps.Clear();
+
+                ctx.Departments.Remove(dep);
+                ctx.SaveChanges();
+
+            }
+            return RedirectToAction("Index");
         }
 
-        //
-        // POST: /Department/Delete/5
 
+        /*
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
+            using (var ctx = new DepContext())
             {
-                // TODO: Add delete logic here
+                var dep = ctx.Departments.FirstOrDefault(item => item.DepartmentId == id);
+                if(dep == null)
+                    return new HttpNotFoundResult("The department could not be found.");
+                dep.Children.Clear();
+                dep.PersonHasJobInDeps.Clear();
 
-                return RedirectToAction("Index");
+                ctx.Departments.Remove(dep);
+                ctx.SaveChanges();
+
             }
-            catch
-            {
-                return View();
-            }
+                return RedirectToAction("Index");   
         }
+          */
+
+        public ActionResult Simple()
+        {
+            List<Department> all = new List<Department>();
+            using (var dc = new UsersContext())
+            {
+                all = dc.Departments.OrderBy(a => a.Parent).ToList();
+            }
+            return View(all);
+        }
+
     }
 }
