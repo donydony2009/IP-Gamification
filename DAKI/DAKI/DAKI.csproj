@@ -163,14 +163,21 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605281613288_Nigger.cs" />
+    <Compile Include="Migrations\201605281613288_Nigger.Designer.cs">
+      <DependentUpon>201605281613288_Nigger.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
+    <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Models\PersonModels.cs" />
     <Compile Include="Models\Types.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -311,8 +318,14 @@
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Account\Badges.cshtml" />
     <Content Include="Views\Account\Progress.cshtml" />
+    <Content Include="Views\Departments\Treeview.cshtml" />
+    <Content Include="Views\Departments\DepTree.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201605281613288_Nigger.resx">
+      <DependentUpon>201605281613288_Nigger.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
