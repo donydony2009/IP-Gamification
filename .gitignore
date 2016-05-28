@@ -22,8 +22,6 @@ $RECYCLE.BIN/
 *.dll
 *.pdb
 *.suo
-DAKI/DAKI/obj/
-DAKI/DAKI/bin/
 
 # =========================
 # Operating System Files
