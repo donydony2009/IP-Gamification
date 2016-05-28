@@ -10,7 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using DAKI.Filters;
 using DAKI.Models;
-using System.Data.Entity;
+using System.Data;
 
 namespace DAKI.Controllers
 {

@@ -8,6 +8,7 @@ using DAKI.Models;
 using System.Web.Security;
 using WebMatrix.WebData;
 using System.Data.Entity;
+using System.Data;
 
 namespace DAKI.Controllers
 {
