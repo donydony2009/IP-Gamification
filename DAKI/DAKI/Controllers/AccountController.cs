@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using DAKI.Filters;
 using DAKI.Models;
+using System.Data;
 
 namespace DAKI.Controllers
 {
@@ -17,6 +18,7 @@ namespace DAKI.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private UsersContext db = new UsersContext();
         //
         // GET: /Account/Login
 
@@ -119,7 +121,7 @@ namespace DAKI.Controllers
             if (ownerAccount == User.Identity.Name)
             {
                 // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.Serializable }))
                 {
                     bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
@@ -348,19 +350,62 @@ namespace DAKI.Controllers
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
-        public ActionResult AwardPoints()
+        //GET: /Account/ListUsersPoints
+        [HttpGet]
+        public ActionResult ListUsersPoints()
         {
-            ViewBag.Message = "Award Points";
-
-            return View();
+            return View(db.UserProfiles.ToList());
         }
+
+        //
+        // GET: /Account/AwardPoints
+
+        public ActionResult AwardPoints(int id = 0)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            UserProfile user = db.UserProfiles.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        //
+        // POST: /Account/AwardPoints
+
+        [HttpPost]
+        public ActionResult AwardPoints(UserProfile user, int val=0)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            if (ModelState.IsValid)
+            {
+                user.Points += val;
+                user.CurrentPoints += val;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ListUsersPoints");
+            }
+            return View(user);
+        }
+
 
         public ActionResult Shop()
         {
-
             ViewBag.Message = "Shop";
+            ShopModel model = new ShopModel();
+            model.Prizes = db.Prizes.ToList();
+            model.CurrentPoints = GetCurrentProfile().CurrentPoints;
 
-            return View();
+            return View(model);
         }
 
         public ActionResult HallOfFame()
@@ -386,6 +431,20 @@ namespace DAKI.Controllers
 
             return View();
         }
+
+        public ActionResult Profile()
+        {
+            return View();
+        }
+
+        public ActionResult Badges()
+        {
+            return View();
+        }
+        public ActionResult Progress()
+        {
+            return View();
+        }
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
@@ -397,6 +456,11 @@ namespace DAKI.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        private UserProfile GetCurrentProfile()
+        {
+            return db.UserProfiles.First<UserProfile>(e => e.UserId == WebSecurity.CurrentUserId);
         }
 
         public enum ManageMessageId

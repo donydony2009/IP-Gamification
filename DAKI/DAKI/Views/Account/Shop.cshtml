@@ -1,43 +1,53 @@
-﻿@{
+﻿@model DAKI.Models.ShopModel
+@{
     ViewBag.Title = "Shop";
 }
 
-@section featured {
-<section class="featured">
-        <div class="content-wrapper">
-            <p class="float-right"><b>200 points</b></p>
-            <hgroup class="title">
-                <h1>Shop</h1>
-            </hgroup>
-            <br />
-            <div id="filter">
-                 @using (Html.BeginForm()){    
-                 <p>@Html.TextBox("SearchString")  
-                 <input type="submit" value="Search" /></p> 
-                } 
-                <h2>Categories:</h2>
-                <ul>
-                    <li>@Html.ActionLink("Goods", "Goods", "Account")</li>
-                    <li>@Html.ActionLink("Free Time", "FreeTime", "Account")</li>
-                </ul>
-            </div>
-            <div id="products">
-                <table>
-                    <tr>
-                        <td><h2>Prod 1</h2><br />Cost: 50 Points <br /> 10 Available<br /><br /><button>Buy</button></td>
-                        <td><h2>Prod 2</h2><br />Cost: 30 Points <br /> 6 Available<br /><br /><button>Buy</button></td>
-                        <td><h2>Prod 3</h2><br />Cost: 15 Points <br /> 50 Available<br /><br /><button>Buy</button></td>
-                    </tr>
-                    <tr>
-                        <td>Prod 4</td>
-                        <td>Prod 5</td>
-                        <td>Prod 6</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-</section>
-}
+<p class="float-right"><b>@Model.CurrentPoints points</b></p>
+<hgroup class="title">
+    <h1>Shop</h1>
+</hgroup>
+<br />
+<div id="filter">
+        @using (Html.BeginForm()){    
+        <p>@Html.TextBox("SearchString")  
+        <input type="submit" value="Search" /></p> 
+    } 
+    <h2>Categories:</h2>
+    <ul>
+        <li>@Html.ActionLink("Goods", "Goods", "Account")</li>
+        <li>@Html.ActionLink("Free Time", "FreeTime", "Account")</li>
+    </ul>
+</div>
+<div id="products">
+    <table>
+        <tr>
+        @{
+            int i = 0;
+            foreach(var item in Model.Prizes)
+            {
+                
+                if (i % 3 == 0 && i != 0)
+                {
+                    @:</tr>
+                    @:<tr>
+                }
+                i++;
+                @:<td><h2>@item.Name</h2><br />Cost: @item.Cost <br /> @item.Limit Available<br /><br />
+                if(item.Limit != 0)
+                {
+                    @:<button>Buy</button>
+                }
+                else
+                {
+                    @:<button disabled>No Stock</button>   
+                }
+                
+           }
+        }
+         </tr>
+    </table>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
