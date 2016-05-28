@@ -431,7 +431,13 @@ namespace DAKI.Controllers
 
         public ActionResult Profile()
         {
-            return View();
+            int id = WebSecurity.CurrentUserId;
+            UserProfile pers = db.UserProfiles.Find(id);
+            if (pers == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pers);
         }
 
         public ActionResult Badges()
