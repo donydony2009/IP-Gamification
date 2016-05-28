@@ -388,7 +388,8 @@ namespace DAKI.Controllers
 
             if (ModelState.IsValid)
             {
-                user.Points = user.Points + val;
+                user.Points += val;
+                user.CurrentPoints += val;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("ListUsersPoints");
@@ -399,10 +400,12 @@ namespace DAKI.Controllers
 
         public ActionResult Shop()
         {
-
             ViewBag.Message = "Shop";
+            ShopModel model = new ShopModel();
+            model.Prizes = db.Prizes.ToList();
+            model.CurrentPoints = GetCurrentProfile().CurrentPoints;
 
-            return View();
+            return View(model);
         }
 
         public ActionResult HallOfFame()
@@ -439,6 +442,11 @@ namespace DAKI.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        private UserProfile GetCurrentProfile()
+        {
+            return db.UserProfiles.First<UserProfile>(e => e.UserId == WebSecurity.CurrentUserId);
         }
 
         public enum ManageMessageId

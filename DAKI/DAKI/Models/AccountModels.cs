@@ -121,6 +121,12 @@ namespace DAKI.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ShopModel
+    {
+        public int CurrentPoints { get; set; }
+        public IEnumerable<Prize> Prizes { get; set; }
+    }
+
     public class ExternalLogin
     {
         public string Provider { get; set; }
