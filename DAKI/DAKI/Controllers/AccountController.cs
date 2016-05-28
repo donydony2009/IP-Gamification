@@ -431,6 +431,20 @@ namespace DAKI.Controllers
 
             return View();
         }
+
+        public ActionResult Profile()
+        {
+            return View();
+        }
+
+        public ActionResult Badges()
+        {
+            return View();
+        }
+        public ActionResult Progress()
+        {
+            return View();
+        }
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
