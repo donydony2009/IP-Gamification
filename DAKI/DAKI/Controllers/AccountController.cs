@@ -11,6 +11,7 @@ using WebMatrix.WebData;
 using DAKI.Filters;
 using DAKI.Models;
 using System.Data;
+using System.Data.Entity;
 
 namespace DAKI.Controllers
 {
