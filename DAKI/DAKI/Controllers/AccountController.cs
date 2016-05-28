@@ -11,6 +11,7 @@ using WebMatrix.WebData;
 using DAKI.Filters;
 using DAKI.Models;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DAKI.Controllers
 {
@@ -397,6 +398,32 @@ namespace DAKI.Controllers
             return View(user);
         }
 
+        [HttpPost]
+        public ActionResult Shop(int PrizeId)
+        {
+            ViewBag.Message = "Shop";
+            UserProfile profile = GetCurrentProfile();
+            Prize prize = db.Prizes.First<Prize>(e => e.PrizeId == PrizeId);
+            if (profile.CurrentPoints >= prize.Cost && prize.Limit > 0)
+            {
+                db.Database.ExecuteSqlCommand(
+                    "insert into UserBuysPrize(UserId, PrizeId, Date) Values(@userId, @prizeId, @date)",
+                    new SqlParameter("userId", WebSecurity.CurrentUserId),
+                    new SqlParameter("prizeId", PrizeId),
+                    new SqlParameter("date", DateTime.Now)
+                    );
+                profile.CurrentPoints -= prize.Cost;
+                prize.Limit--;
+                db.Entry(profile).State = EntityState.Modified;
+                db.Entry(prize).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            ShopModel model = new ShopModel();
+            model.Prizes = db.Prizes.ToList();
+            model.CurrentPoints = GetCurrentProfile().CurrentPoints;
+
+            return View(model);
+        }
 
         public ActionResult Shop()
         {

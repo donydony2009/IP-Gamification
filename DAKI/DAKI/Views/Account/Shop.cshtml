@@ -36,7 +36,13 @@
                 @:<td><h2>@item.Name</h2><br />Cost: @item.Cost <br /> @item.Limit Available<br /><br />
                 if(item.Limit != 0)
                 {
-                    @:<button>Buy</button>
+                    using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) 
+                    {
+                        @:@Html.AntiForgeryToken()
+                        @:@Html.ValidationSummary(true)
+                        @:@Html.Hidden("PrizeId", item.PrizeId)
+                        @:<button>Buy</button>
+                    }
                 }
                 else
                 {
