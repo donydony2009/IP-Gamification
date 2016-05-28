@@ -31,6 +31,11 @@ namespace DAKI.Models
         public string Email { get; set; }
         public int CurrentPoints { get; set; }
         public int Points { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string BirthDate { get; set; }
+        public string Address { get; set; }
+
     }
 
     [Table("UserBuysPrize")]
