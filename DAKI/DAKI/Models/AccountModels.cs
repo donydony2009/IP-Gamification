@@ -19,6 +19,10 @@ namespace DAKI.Models
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserBuysPrize> UserBuysPrize { get; set; }
         public DbSet<Prize> Prizes { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
     }
 
     [Table("UserProfile")]

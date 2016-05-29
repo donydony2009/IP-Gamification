@@ -86,7 +86,10 @@ namespace DAKI.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { 
+                        Points = 0, 
+                        CurrentPoints = 0
+                    });
                     Roles.AddUserToRole(model.UserName, Types.Role.Regular);
                     using (var context = new UsersContext())
                     {

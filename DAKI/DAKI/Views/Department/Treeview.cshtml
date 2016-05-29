@@ -1,0 +1,36 @@
+﻿@using DAKI.Models;
+@{
+    ViewBag.Title = "Treeview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Treeview</h2>
+
+@helper GetTreeView(List<Department> deps, int parentID)
+{
+    foreach (var i in deps.Where(a => a.Parent.Equals(parentID)))
+    {
+        <li>
+            @{var subdeps = deps.Where(a => a.Parent.Equals(i.DepartmentId)).Count();}
+            @if (subdeps > 0)
+            {
+                <span class="collapse collapsible">&nbsp;</span>
+            }
+            else
+            {
+                <span style="width:15px; display:inline-block">&nbsp;</span>
+            }
+            <span>
+                <i>@i.Title</i>
+                <i>@i.Description</i>
+            </span>
+            @if (subdeps > 0)
+            {
+                <ul>
+                    @GetTreeView(deps, i.DepartmentId)
+                    @* Recursive  Call for Populate Sub items here*@
+                </ul>
+            }
+        </li>
+    }
+}
