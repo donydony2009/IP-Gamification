@@ -194,3 +194,8 @@ C:\Users\ryent\Source\Repos\IP-Gamification\DAKI\DAKI\bin\DotNetOpenAuth.OAuth.C
 C:\Users\ryent\Source\Repos\IP-Gamification\DAKI\DAKI\bin\DotNetOpenAuth.OAuth.xml
 C:\Users\ryent\Source\Repos\IP-Gamification\DAKI\DAKI\bin\DotNetOpenAuth.OpenId.xml
 C:\Users\ryent\Source\Repos\IP-Gamification\DAKI\DAKI\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\bin\Org.Mentalis.Security.Cryptography.dll
+C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\bin\Mono.Math.dll
+C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\bin\Org.Mentalis.Security.Cryptography.xml
+C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\bin\Mono.Math.xml
+C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\obj\Debug\DAKI.Migrations.migr1.resources

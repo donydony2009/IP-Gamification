@@ -1,7 +1,8 @@
 ﻿@model DAKI.Models.DepartmentModel
 @{
     ViewBag.Title = "Create Department";
-}<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+}
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
@@ -10,7 +11,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Department</legend>
+        <legend>Add New Department</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Title)
@@ -36,10 +37,16 @@
             @Html.ValidationMessageFor(model => model.Rules)
         </div>
 
-  
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Parent)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Parent, Model.AllDepartments(), "Select department parent...")
+            @Html.ValidationMessageFor(model => model.Parent)
+        </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create" onclick="@Html.Action("Create","Department")" />
         </p>
     </fieldset>
 }

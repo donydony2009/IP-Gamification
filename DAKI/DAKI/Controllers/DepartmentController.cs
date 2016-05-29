@@ -73,13 +73,13 @@ namespace DAKI.Controllers
                 {
                     Title = model.Title,
                     Description = model.Description,
-                    ParentId = model.Parent,
+                    ParentId = Int32.Parse(model.Parent.Value),
                     Rules = model.Rules
                 };
                 if (model.Children != null)
                     foreach (var c in model.Children)
                     {
-                        var child = ctx.Departments.FirstOrDefault(item => item.DepartmentId == c);
+                        var child = ctx.Departments.FirstOrDefault(item => item.DepartmentId == Int32.Parse(c.Value));
                         child.ParentId = department.DepartmentId;
                     }
                 //model.Children.Each(d => department.Children.Add(ctx.Departments.FirstOrDefault(item => item.ParentId == d)));
@@ -119,13 +119,13 @@ namespace DAKI.Controllers
                 var department = ctx.Departments.FirstOrDefault(item => item.DepartmentId == model.Id);
                 department.Title = model.Title;
                 department.Description = model.Description;
-                department.ParentId = model.Parent;
+                department.ParentId = Int32.Parse(model.Parent.Value);
                 department.Rules = model.Rules;
 
                 if (model.Children != null)
                     foreach (var c in model.Children)
                     {
-                        var child = ctx.Departments.FirstOrDefault(item => item.DepartmentId == c);
+                        var child = ctx.Departments.FirstOrDefault(item => item.DepartmentId == Int32.Parse(c.Value));
                         child.ParentId = department.DepartmentId;
                     }
                 //model.Children.Each(d => department.Children.Add(ctx.Departments.FirstOrDefault(item => item.ParentId == d)));

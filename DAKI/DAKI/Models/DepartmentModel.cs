@@ -7,6 +7,7 @@ using System.Data;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Globalization;
+using System.Web.Mvc;
 
 
 namespace DAKI.Models
@@ -21,8 +22,8 @@ namespace DAKI.Models
 
         public List<int> ManagerIds;
 
-        public int? Parent;
-        public List<int> Children = new List<int>();
+        public SelectListItem Parent;
+        public List<SelectListItem> Children = new List<SelectListItem>();
 
 
         public DepartmentModel(Department dep)
@@ -31,14 +32,21 @@ namespace DAKI.Models
             this.Title = dep.Title;
             this.Rules = dep.Rules;
             this.Description = dep.Description;
-            this.Parent = dep.ParentId;
+            this.Parent.Value = dep.ParentId.ToString() ;
+            using(var ctx = new UsersContext()){
+                var s = ctx.Departments.FirstOrDefault(d=>d.ParentId == dep.ParentId).Title;
+                this.Parent.Text = s;
+            }
             foreach (var d in dep.PersonHasJobInDeps)
                 if (d.Job.Manages == true)
                 {
                     this.ManagerIds.Add(d.JobId);
                 }
             foreach (var d in dep.Children)
-                this.Children.Add(d.DepartmentId);
+                this.Children.Add(new SelectListItem {
+                    Value = d.DepartmentId.ToString(),
+                    Text = d.Title
+                });
 
 
         }
@@ -60,12 +68,41 @@ namespace DAKI.Models
                         this.ManagerIds.Add(d.JobId);
                     }
                 foreach (var d in dep.Children)
-                    this.Children.Add(d.DepartmentId);
-                this.Parent = dep.ParentId;
+                    this.Children.Add(new SelectListItem
+                    {
+                        Value = d.DepartmentId.ToString(),
+                        Text = d.Title
+                    });
+                this.Parent.Value = dep.ParentId.ToString();
+                using (var ctx = new UsersContext())
+                {
+                    var s = ctx.Departments.FirstOrDefault(d => d.ParentId == dep.ParentId).Title;
+                    this.Parent.Text = s;
+                }
             }
 
 
         }
+
+
+        public List<SelectListItem> AllDepartments()
+        {
+            List<Department> all = new List<Department>();
+            using (var dc = new UsersContext())
+            {
+                if (dc.Departments != null)
+                all = dc.Departments.OrderBy(a => a.Parent.DepartmentId).ToList();
+            }
+            List<SelectListItem> deps = new List<SelectListItem>();
+            foreach (var d in all)
+                deps.Add(new SelectListItem
+                {
+                    Value = d.DepartmentId.ToString(),
+                    Text = d.Title
+                });
+            return deps;
+        }
+
 
         public DepartmentModel() { }
 
