@@ -35,6 +35,11 @@ namespace DAKI.Models
         public string Email { get; set; }
         public int CurrentPoints { get; set; }
         public int Points { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public Nullable  <DateTime> BirthDate { get; set; }
+        public string Address { get; set; }
+
     }
 
     [Table("UserBuysPrize")]
@@ -123,6 +128,12 @@ namespace DAKI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class ShopModel
+    {
+        public int CurrentPoints { get; set; }
+        public IEnumerable<Prize> Prizes { get; set; }
     }
 
     public class ExternalLogin
