@@ -10,7 +10,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Department</legend>
+        <legend>Add New Department</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Title)
@@ -36,7 +36,13 @@
             @Html.ValidationMessageFor(model => model.Rules)
         </div>
 
-  
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Parent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Parent)
+            @Html.ValidationMessageFor(model => model.Parent)
+        </div>
 
         <p>
             <input type="submit" value="Create" />
