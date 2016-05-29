@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<DAKI.Models.Badge>
+
+@{
     ViewBag.Title = "Badges";
 }
 <div class="profileMenu">
@@ -11,11 +13,18 @@
 </div>
 <div class="profile">
     <hgroup class="title">
-        <h1>Username (rank)</h1>
+        <h1>@ViewBag.Title:</h1>
     </hgroup>
-    <p>FullName</p>
-    <p>Email</p>
-    <p>Address</p>
-    <p>Department</p>
-    <p>Job</p>
+    @foreach (var item in Model) {
+        <div class="badge">
+            <p>@Html.DisplayFor(modelItem => item.Title)</p>
+            <p>@Html.DisplayFor(modelItem => item.Description)</p>
+            <p>@Html.DisplayFor(modelItem => item.NecessaryPoints)</p>
+        </div>
+    }
+    
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

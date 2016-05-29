@@ -23,6 +23,10 @@ namespace DAKI.Models
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
+        public DbSet<Badge> Badges { get; set; }
+        public DbSet<UserHasBadge> UserBadges { get; set; }
+        public DbSet<Skills> Skills { get; set; }
+        public DbSet<UserSkill> UserSkills { get; set; }
     }
 
     [Table("UserProfile")]
@@ -63,6 +67,32 @@ namespace DAKI.Models
         public string Description { get; set; }
         public int Cost { get; set; }
         public int Limit { get; set; }
+    }
+    [Table("Badge")]
+    public class Badge
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int BadgeId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ImageURL { get; set; }
+        public int NecessaryPoints { get; set; }
+    }
+
+    [Table("UserHasBadge")]
+    public class UserHasBadge
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int BadgeId { get; set; }
+        public int UserId { get; set; }
+    }
+
+    public class BadgesModel
+    {
+        public int BadgeId { get; set; }
+        public IEnumerable<Badge> Badges { get; set; }
     }
 
     public class RegisterExternalLoginModel
@@ -134,6 +164,30 @@ namespace DAKI.Models
     {
         public int CurrentPoints { get; set; }
         public IEnumerable<Prize> Prizes { get; set; }
+    }
+    
+    public class SkillModel
+    {
+        public string UserName { get; set; }
+        public IEnumerable<Skills> Skills { get; set; }
+    }
+
+    [Table("Skills")]
+    public class Skills
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int SkillId { get; set; }
+        public string Name { get; set; }
+    }
+
+    [Table("UserHasSkill")]
+    public class UserSkill
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int SkillId { get; set; }
+        public int UserId { get; set; }
     }
 
     public class ExternalLogin

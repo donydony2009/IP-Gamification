@@ -1,7 +1,45 @@
-﻿@{
-    ViewBag.Title = "Notifications";
+﻿@model IEnumerable<DAKI.Models.UserBuysPrize>
+@{
+    ViewBag.Title = "Your Purchases";
 }
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
+    <h1>@ViewBag.Title</h1>
 </hgroup>
+
+<div class="datagrid">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    TransactionId
+                </th>
+                <th>
+                    PrizeId
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrizeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

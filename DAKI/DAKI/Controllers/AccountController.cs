@@ -440,26 +440,36 @@ namespace DAKI.Controllers
 
         public ActionResult HallOfFame()
         {
-
-            ViewBag.Message = "Hall of Fame";
-
-            return View();
+            return View(db.UserProfiles.OrderByDescending(x => x.Points).ToList());
         }
 
         public ActionResult SearchEmployee()
         {
 
-            ViewBag.Message = "Search an employee";
+            return View(db.UserProfiles.ToList());
+        }
 
-            return View();
+        public ActionResult DetailsUser(int id=0)
+        {
+
+            UserProfile user = db.UserProfiles.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            SkillModel us = new SkillModel();
+            us.UserName = user.UserName;
+            List<int> skillid = db.UserSkills.Where(e => e.UserId == user.UserId).Select(x => x.SkillId).ToList();
+            us.Skills = db.Skills.Where(e => skillid.Contains(e.SkillId)).ToList();
+            return View(us);
         }
 
         public ActionResult Notifications()
         {
+            int id = WebSecurity.CurrentUserId;
+            UserProfile pers = db.UserProfiles.Find(id);
 
-            ViewBag.Message = "Your Notifications!";
-
-            return View();
+            return View(db.UserBuysPrize.Where(e => e.UserId==id).ToList());
         }
 
         public ActionResult Profile()
@@ -475,7 +485,12 @@ namespace DAKI.Controllers
 
         public ActionResult Badges()
         {
-            return View();
+            var id = WebSecurity.CurrentUserId;
+            List<int> bid = db.UserBadges.Where(e => e.UserId==id).Select(x=>x.BadgeId).ToList();
+            BadgesModel model = new BadgesModel();
+            model.Badges = db.Badges.Where(e => bid.Contains(e.BadgeId)).ToList();
+            
+            return View(model.Badges);
         }
         public ActionResult Progress()
         {
@@ -497,6 +512,11 @@ namespace DAKI.Controllers
         private UserProfile GetCurrentProfile()
         {
             return db.UserProfiles.First<UserProfile>(e => e.UserId == WebSecurity.CurrentUserId);
+        }
+        
+        private UserHasBadge GetCurrentBadge()
+        {
+            return db.UserBadges.First<UserHasBadge>(e => e.UserId == WebSecurity.CurrentUserId);
         }
 
         public enum ManageMessageId

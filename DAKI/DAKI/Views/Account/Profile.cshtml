@@ -12,11 +12,14 @@
 </div>
 <div class="profile">
     <hgroup class="title">
-        <h1><strong>@User.Identity.Name</strong> (rank)</h1>
+        <h1><strong>@User.Identity.Name</strong></h1>
     </hgroup>
     <p>Fullname: @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)</p>
     <p>Email: @Html.DisplayFor(model => model.Email)</p>
     <p>Address: @Html.DisplayFor(model => model.Address)</p>
     <p>Department</p>
     <p>Job</p>
+    <br />
+    <p><strong>Total points:</strong> @Html.DisplayFor(model => model.Points)</p>
+    <p><strong>Current points:</strong> @Html.DisplayFor(model => model.CurrentPoints)</p>
 </div>
