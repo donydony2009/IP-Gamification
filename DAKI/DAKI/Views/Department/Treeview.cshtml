@@ -8,10 +8,10 @@
 
 @helper GetTreeView(List<Department> deps, int parentID)
 {
-    foreach (var i in deps.Where(a => a.Parent.Equals(parentID)))
+    foreach (var i in deps.Where(a => a.ParentId.Equals(parentID)))
     {
         <li>
-            @{var subdeps = deps.Where(a => a.Parent.Equals(i.DepartmentId)).Count();}
+            @{var subdeps = deps.Where(a => a.ParentId.Equals(i.DepartmentId)).Count();}
             @if (subdeps > 0)
             {
                 <span class="collapse collapsible">&nbsp;</span>

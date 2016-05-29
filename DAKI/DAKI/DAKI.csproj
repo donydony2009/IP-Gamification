@@ -178,6 +178,14 @@
     <Compile Include="Migrations\201605291802049_migr1.Designer.cs">
       <DependentUpon>201605291802049_migr1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605291939120_Initial.cs" />
+    <Compile Include="Migrations\201605291939120_Initial.Designer.cs">
+      <DependentUpon>201605291939120_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605292047544_NoMoreCircDep.cs" />
+    <Compile Include="Migrations\201605292047544_NoMoreCircDep.Designer.cs">
+      <DependentUpon>201605292047544_NoMoreCircDep.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
@@ -324,9 +332,10 @@
     <Content Include="Views\Account\Badges.cshtml" />
     <Content Include="Views\Account\Progress.cshtml" />
     <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
-    <Content Include="Views\Departments\Create.cshtml" />
-    <Content Include="Views\Departments\DepTree.cshtml" />
-    <Content Include="Views\Departments\Treeview.cshtml" />
+    <Content Include="Views\Department\Create.cshtml" />
+    <Content Include="Views\Department\DepTree.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Department\Treeview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605281613288_Nigger.resx">
@@ -334,6 +343,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605291802049_migr1.resx">
       <DependentUpon>201605291802049_migr1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605291939120_Initial.resx">
+      <DependentUpon>201605291939120_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605292047544_NoMoreCircDep.resx">
+      <DependentUpon>201605292047544_NoMoreCircDep.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -199,3 +199,5 @@ C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\bin\Mono.Math.dll
 C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\bin\Org.Mentalis.Security.Cryptography.xml
 C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\bin\Mono.Math.xml
 C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\obj\Debug\DAKI.Migrations.migr1.resources
+C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\obj\Debug\DAKI.Migrations.Initial.resources
+C:\Users\Karina\Documents\GitHub\IP-Gamification\DAKI\DAKI\obj\Debug\DAKI.Migrations.NoMoreCircDep.resources
