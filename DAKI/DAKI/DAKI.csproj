@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -318,9 +319,10 @@
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Account\Badges.cshtml" />
     <Content Include="Views\Account\Progress.cshtml" />
-    <Content Include="Views\Departments\Treeview.cshtml" />
-    <Content Include="Views\Departments\DepTree.cshtml" />
+    <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
     <Content Include="Views\Departments\Create.cshtml" />
+    <Content Include="Views\Departments\DepTree.cshtml" />
+    <Content Include="Views\Departments\Treeview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605281613288_Nigger.resx">
