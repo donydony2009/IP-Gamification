@@ -5,7 +5,9 @@
 <script src="~/Scripts/jquery-1.7.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
+<hgroup class="title">
+    <h1>Departments</h1>
+</hgroup>
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -41,12 +43,12 @@
             @Html.LabelFor(model => model.Parent)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.Parent, Model.AllDepartments(), "Select department parent...")
+            @Html.DropDownListFor(model => model.Parent, DAKI.Models.DepartmentModel.AllDepartments(), "Select department parent...")
             @Html.ValidationMessageFor(model => model.Parent)
         </div>
 
         <p>
-            <input type="submit" value="Create" onclick="@Html.Action("Create","Department")" />
+            <input type="submit" value="Create" onclick="@Url.Action("Create","Department")" />
         </p>
     </fieldset>
 }

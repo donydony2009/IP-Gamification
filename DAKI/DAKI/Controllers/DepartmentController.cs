@@ -182,7 +182,7 @@ namespace DAKI.Controllers
         }
           */
         [HttpGet]
-        public ActionResult Treeview()
+        public ActionResult DepTree()
         {
             List<Department> all = new List<Department>();
             using (var dc = new UsersContext())

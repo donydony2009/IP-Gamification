@@ -16,17 +16,17 @@ namespace DAKI.Models
         {
         }
 
-        public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<UserBuysPrize> UserBuysPrize { get; set; }
-        public DbSet<Prize> Prizes { get; set; }
-        public DbSet<Person> Persons { get; set; }
-        public DbSet<Job> Jobs { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
-        public DbSet<Badge> Badges { get; set; }
-        public DbSet<UserHasBadge> UserBadges { get; set; }
-        public DbSet<Skills> Skills { get; set; }
-        public DbSet<UserSkill> UserSkills { get; set; }
+        public virtual DbSet<UserProfile> UserProfiles { get; set; }
+        public virtual DbSet<UserBuysPrize> UserBuysPrize { get; set; }
+        public virtual DbSet<Prize> Prizes { get; set; }
+        public virtual DbSet<Person> Persons { get; set; }
+        public virtual DbSet<Job> Jobs { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
+        public virtual DbSet<Badge> Badges { get; set; }
+        public virtual DbSet<UserHasBadge> UserBadges { get; set; }
+        public virtual DbSet<Skills> Skills { get; set; }
+        public virtual DbSet<UserSkill> UserSkills { get; set; }
     }
 
     [Table("UserProfile")]

@@ -93,7 +93,7 @@ namespace DAKI.Models
         }
 
 
-        public List<SelectListItem> AllDepartments()
+        public static List<SelectListItem> AllDepartments()
         {
             List<Department> all = new List<Department>();
             using (var dc = new UsersContext())

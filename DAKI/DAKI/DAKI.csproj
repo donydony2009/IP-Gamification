@@ -186,6 +186,10 @@
     <Compile Include="Migrations\201605292047544_NoMoreCircDep.Designer.cs">
       <DependentUpon>201605292047544_NoMoreCircDep.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605292220001_skills.cs" />
+    <Compile Include="Migrations\201605292220001_skills.Designer.cs">
+      <DependentUpon>201605292220001_skills.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
@@ -335,7 +339,8 @@
     <Content Include="Views\Department\Create.cshtml" />
     <Content Include="Views\Department\DepTree.cshtml" />
     <Content Include="Views\Department\Edit.cshtml" />
-    <Content Include="Views\Department\Treeview.cshtml" />
+    <Content Include="App_Code\Treeview.cshtml" />
+    <Content Include="Views\Account\DetailsUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605281613288_Nigger.resx">
@@ -350,10 +355,14 @@
     <EmbeddedResource Include="Migrations\201605292047544_NoMoreCircDep.resx">
       <DependentUpon>201605292047544_NoMoreCircDep.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605292220001_skills.resx">
+      <DependentUpon>201605292220001_skills.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
