@@ -167,6 +167,10 @@ namespace DAKI.Controllers
         }
 
         //
+        // GET: /Default1/Create
+
+        
+        //
         // GET: /Admin/ListPrizes
 
         public ActionResult ListPrizes()
@@ -268,6 +272,110 @@ namespace DAKI.Controllers
                 return RedirectToAction("ListPrizes");
             }
             return View(prize);
+        }
+
+        
+
+        public ActionResult CreateAchievement()
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+            return View();
+        }
+
+        //
+        // POST: /Default1/Create
+
+        [HttpPost]
+        public ActionResult CreateAchievement(Achievement a)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.Achievements.Add(a);
+                db.SaveChanges();
+                return RedirectToAction("ListAchievements");
+            }
+
+            return View(a);
+        }
+        //
+        // GET: /Admin/DeletePrize/5
+
+        public ActionResult DeleteAchievement(int id)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            Achievement a = db.Achievements.Find(id);
+            if (a == null)
+            {
+                return HttpNotFound();
+            }
+            return View(a);
+        }
+
+        //
+        // POST: /Admin/DeleteAchievement/5
+
+        [HttpPost, ActionName("DeleteAchievement")]
+        public ActionResult DeleteAchievementConfirmed(int id)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            Achievement a = db.Achievements.Find(id);
+            db.Achievements.Remove(a);
+            db.SaveChanges();
+            return RedirectToAction("ListAchievements");
+        }
+
+        //
+        // GET: /Admin/EditAchievement
+
+        public ActionResult EditAchievement(int id)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            Achievement a = db.Achievements.Find(id);
+            if (a == null)
+            {
+                return HttpNotFound();
+            }
+            return View(a);
+        }
+
+        //
+        // POST: /Admin/EditAchievement
+
+        [HttpPost]
+        public ActionResult EditAchievement(Achievement a)
+        {
+            if (!User.IsInRole(Types.Role.Admin))
+            {
+                return Redirect("/Admin/NoPermissions");
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(a).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ListPrizes");
+            }
+            return View(a);
         }
 
         //

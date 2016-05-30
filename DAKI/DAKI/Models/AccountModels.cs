@@ -27,6 +27,8 @@ namespace DAKI.Models
         public virtual DbSet<UserHasBadge> UserBadges { get; set; }
         public virtual DbSet<Skills> Skills { get; set; }
         public virtual DbSet<UserSkill> UserSkills { get; set; }
+        public virtual DbSet<Achievement> Achievements { get; set; }
+        public virtual DbSet<UserHasAchievement> UserAchievements { get; set; }
     }
 
     [Table("UserProfile")]
@@ -165,6 +167,12 @@ namespace DAKI.Models
         public int CurrentPoints { get; set; }
         public IEnumerable<Prize> Prizes { get; set; }
     }
+
+    public class AchievementModel
+    {
+        public int CurrentPoints { get; set; }
+        public IEnumerable<Achievement> Achievements { get; set; }
+    }
     
     public class SkillModel
     {
@@ -188,6 +196,28 @@ namespace DAKI.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int SkillId { get; set; }
         public int UserId { get; set; }
+    }
+
+    [Table("Achievement")]
+    public class Achievement
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int AchievementId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ImageURL { get; set; }
+        public int Points { get; set; }
+    }
+
+    [Table("UserHasAchievement")]
+    public class UserHasAchievement
+    {
+        [Key, Column(Order = 0)]
+        public int UserId { get; set; }
+        [Key, Column(Order = 1)]
+        public int AchievementId { get; set; }
+        public DateTimeOffset Date { get; set; }
     }
 
     public class ExternalLogin

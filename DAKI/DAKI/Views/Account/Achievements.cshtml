@@ -1,13 +1,13 @@
-﻿@model IEnumerable<DAKI.Models.Badge>
+﻿@model IEnumerable<DAKI.Models.Achievement>
 
 @{
-    ViewBag.Title = "Badges";
+    ViewBag.Title = "Achievements";
 }
 <div class="profileMenu">
     <ul>
         <li>@Html.ActionLink("Profile", "Profile", "Account")</li>
-        <li class="active">@Html.ActionLink("Badges", "Badges", "Account")</li>
-        <li>@Html.ActionLink("Achievements", "Achievements", "Account")</li>
+        <li>@Html.ActionLink("Badges", "Badges", "Account")</li>
+        <li class="active">@Html.ActionLink("Achievements", "Achievements", "Account")</li>
         <li>@Html.ActionLink("Progress", "Progress", "Account")</li>
         <li>@Html.ActionLink("Manage", "Manage", "Account")</li>
     </ul>
@@ -16,14 +16,15 @@
     <hgroup class="title">
         <h1>@ViewBag.Title:</h1>
     </hgroup>
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <div class="badge">
             <p>@Html.DisplayFor(modelItem => item.Title)</p>
             <p>@Html.DisplayFor(modelItem => item.Description)</p>
-            <p>@Html.DisplayFor(modelItem => item.NecessaryPoints)</p>
+            <p>@Html.DisplayFor(modelItem => item.Points)</p>
         </div>
     }
-    
+
 </div>
 
 @section Scripts {

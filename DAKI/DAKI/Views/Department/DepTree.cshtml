@@ -10,7 +10,7 @@
     <h1>Departments Tree</h1>
 </hgroup>
 
-<button style="float: right; margin-right:5%" onclick="@Url.Action("Create", "Department")">Add Department</button>
+@if(User.IsInRole(Types.Role.Admin)){<button style="float: right; margin-right:5%" onclick="@Url.Action("Create", "Department")">Add Department</button>}
     <style>
             /*Here We will add some css for style our treeview*/
             .collapse {

@@ -190,6 +190,18 @@
     <Compile Include="Migrations\201605292220001_skills.Designer.cs">
       <DependentUpon>201605292220001_skills.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605300157388_achievements.cs" />
+    <Compile Include="Migrations\201605300157388_achievements.Designer.cs">
+      <DependentUpon>201605300157388_achievements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605300219161_seedingstufff.cs" />
+    <Compile Include="Migrations\201605300219161_seedingstufff.Designer.cs">
+      <DependentUpon>201605300219161_seedingstufff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605300220383_seedingstuff.cs" />
+    <Compile Include="Migrations\201605300220383_seedingstuff.Designer.cs">
+      <DependentUpon>201605300220383_seedingstuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
@@ -341,6 +353,7 @@
     <Content Include="Views\Department\Edit.cshtml" />
     <Content Include="App_Code\Treeview.cshtml" />
     <Content Include="Views\Account\DetailsUser.cshtml" />
+    <Content Include="Views\Account\Achievements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605281613288_Nigger.resx">
@@ -357,6 +370,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605292220001_skills.resx">
       <DependentUpon>201605292220001_skills.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605300157388_achievements.resx">
+      <DependentUpon>201605300157388_achievements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605300219161_seedingstufff.resx">
+      <DependentUpon>201605300219161_seedingstufff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605300220383_seedingstuff.resx">
+      <DependentUpon>201605300220383_seedingstuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
