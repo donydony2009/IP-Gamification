@@ -22,6 +22,7 @@
                             <li>@Html.ActionLink("Search Employee", "SearchEmployee", "Account")</li>
                             <li>@Html.ActionLink("Hall of Fame", "HallOfFame", "Account")</li>
                             <li>@Html.ActionLink("Shop", "Shop", "Account")</li>
+                            <li>@Html.ActionLink("Departments", "DepTree", "Department")</li>
                             @if(User.IsInRole(Types.Role.Admin))
                             {
                                 <li>@Html.ActionLink("Manage Roles", "RoleManagement", "Admin")</li>

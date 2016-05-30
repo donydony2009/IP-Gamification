@@ -20,24 +20,28 @@ namespace DAKI.Models
             public Nullable<System.DateTime> BirthDate { get; set; }
             public string Adress { get; set; }
 
-            public virtual ICollection<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
-            public virtual ICollection<UserProfile> UserProfiles { get; set; }
+            //public virtual ICollection<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
+            //public virtual ICollection<UserProfile> UserProfiles { get; set; }
         }
 
     [Table("Department")]
         public class Department
         {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-            public int DepartmentId { get; set; }
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]  
+        public int DepartmentId { get; set; }
+        [Required]
             public string Title { get; set; }
             public string Description { get; set; }
+
             public Nullable<int> ParentId { get; set; }
             public Nullable<bool> Rules { get; set; }
 
-            public virtual ICollection<Department> Children { get; set; }
-            public virtual Department Parent { get; set; }
-            public virtual ICollection<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
+            //[InverseProperty("Parent")]
+            //public virtual ICollection<Department> Children { get; set; }
+            //[ForeignKey("ParentId")]    
+            //public virtual Department Parent { get; set; }
+            //public virtual ICollection<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
         }
 
     [Table("Job")]
@@ -49,7 +53,7 @@ namespace DAKI.Models
             public string Title { get; set; }
             public bool Manages { get; set; }
 
-            public virtual ICollection<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
+            //public virtual ICollection<PersonHasJobInDep> PersonHasJobInDeps { get; set; }
         }
 
     [Table("PersonHasJobInDep")]
@@ -63,10 +67,13 @@ namespace DAKI.Models
         public int DepartmentId { get; set; }
         public System.DateTime StartingDate { get; set; }
         public Nullable<int> Salary { get; set; }
-    
-        public virtual Department Department { get; set; }
-        public virtual Job Job { get; set; }
-        public virtual Person Person { get; set; }
+
+        //[ForeignKey("DepartmentId")]
+        //public virtual Department Department { get; set; }
+        //[ForeignKey("JobId")]
+        //public virtual Job Job { get; set; }
+        //[ForeignKey("PersonId")]
+        //public virtual Person Person { get; set; }
     }
 
 

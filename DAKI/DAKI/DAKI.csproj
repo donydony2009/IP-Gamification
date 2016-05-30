@@ -178,6 +178,30 @@
     <Compile Include="Migrations\201605291802049_migr1.Designer.cs">
       <DependentUpon>201605291802049_migr1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605291939120_Initial.cs" />
+    <Compile Include="Migrations\201605291939120_Initial.Designer.cs">
+      <DependentUpon>201605291939120_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605292047544_NoMoreCircDep.cs" />
+    <Compile Include="Migrations\201605292047544_NoMoreCircDep.Designer.cs">
+      <DependentUpon>201605292047544_NoMoreCircDep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605292220001_skills.cs" />
+    <Compile Include="Migrations\201605292220001_skills.Designer.cs">
+      <DependentUpon>201605292220001_skills.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605300157388_achievements.cs" />
+    <Compile Include="Migrations\201605300157388_achievements.Designer.cs">
+      <DependentUpon>201605300157388_achievements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605300219161_seedingstufff.cs" />
+    <Compile Include="Migrations\201605300219161_seedingstufff.Designer.cs">
+      <DependentUpon>201605300219161_seedingstufff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605300220383_seedingstuff.cs" />
+    <Compile Include="Migrations\201605300220383_seedingstuff.Designer.cs">
+      <DependentUpon>201605300220383_seedingstuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
@@ -324,9 +348,12 @@
     <Content Include="Views\Account\Badges.cshtml" />
     <Content Include="Views\Account\Progress.cshtml" />
     <Content Include="Views\Admin\_NoPermissionsPartial.cshtml" />
-    <Content Include="Views\Departments\Create.cshtml" />
-    <Content Include="Views\Departments\DepTree.cshtml" />
-    <Content Include="Views\Departments\Treeview.cshtml" />
+    <Content Include="Views\Department\Create.cshtml" />
+    <Content Include="Views\Department\DepTree.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="App_Code\Treeview.cshtml" />
+    <Content Include="Views\Account\DetailsUser.cshtml" />
+    <Content Include="Views\Account\Achievements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605281613288_Nigger.resx">
@@ -335,10 +362,29 @@
     <EmbeddedResource Include="Migrations\201605291802049_migr1.resx">
       <DependentUpon>201605291802049_migr1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605291939120_Initial.resx">
+      <DependentUpon>201605291939120_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605292047544_NoMoreCircDep.resx">
+      <DependentUpon>201605292047544_NoMoreCircDep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605292220001_skills.resx">
+      <DependentUpon>201605292220001_skills.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605300157388_achievements.resx">
+      <DependentUpon>201605300157388_achievements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605300219161_seedingstufff.resx">
+      <DependentUpon>201605300219161_seedingstufff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605300220383_seedingstuff.resx">
+      <DependentUpon>201605300220383_seedingstuff.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

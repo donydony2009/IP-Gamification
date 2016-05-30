@@ -492,6 +492,17 @@ namespace DAKI.Controllers
             
             return View(model.Badges);
         }
+
+        public ActionResult Achievements()
+        {
+            var id = WebSecurity.CurrentUserId;
+            List<int> bid = db.UserAchievements.Where(e => e.UserId == id).Select(x => x.AchievementId).ToList();
+            AchievementModel model = new AchievementModel();
+            model.Achievements = db.Achievements.Where(e => bid.Contains(e.AchievementId)).ToList();
+
+            return View(model.Achievements);
+        }
+
         public ActionResult Progress()
         {
             return View();

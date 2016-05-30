@@ -1,0 +1,29 @@
+﻿@using System.Web.Mvc;
+@helper GetTreeView(List<DAKI.Models.Department> deps, int? parentID)
+{
+    foreach (var i in deps.Where(a => a.ParentId.Equals(parentID)))
+    {
+        <li>
+            @{var subdeps = deps.Where(a => a.ParentId.Equals(i.DepartmentId)).Count();}
+            @if (subdeps > 0)
+            {
+                <span class="collapse collapsible">&nbsp;</span>
+            }
+            else
+            {
+                <span style="width:15px; display:inline-block">&nbsp;</span>
+            }
+            <span>
+                <b @*onclick = @Url.Action("Edit", "Department", new { id = i.DepartmentId})*@>@i.Title</b>
+                <i>@i.Description</i>
+            </span>
+            @if (subdeps > 0)
+            {
+                <ul>
+                    @GetTreeView(deps, i.DepartmentId)
+                    @* Recursive  Call for Populate Sub items here*@
+                </ul>
+            }
+        </li>
+    }
+}

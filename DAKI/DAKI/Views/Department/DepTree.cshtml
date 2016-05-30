@@ -1,77 +1,85 @@
 ﻿@using DAKI.Models;
-@model List<DepartmentModel>
+@model List<Department>
 
 @{
     ViewBag.Title = "DepTree";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DepTree</h2>
+<hgroup class="title">
+    <h1>Departments Tree</h1>
+</hgroup>
 
-<style>
-    /*Here We will add some css for style our treeview*/
-    .collapse {
-        width: 15px;
-        background-image: url('../Images/ui-icons_454545_256x240.png');
-        background-repeat: no-repeat;
-        background-position: -36px -17px;
-        display: inline-block;
-        cursor: pointer;
-    }
+@if(User.IsInRole(Types.Role.Admin)){<button style="float: right; margin-right:5%" onclick="@Url.Action("Create", "Department")">Add Department</button>}
+    <style>
+            /*Here We will add some css for style our treeview*/
+            .collapse {
+                width: 15px;
+                display: inline-block;
+                cursor: pointer;
+            }
+            .collapsible {
+                background: #BADA55;
+                width: 0.8em;
+                height: 0.8em;
+                border-radius: 200px 200px 0px 200px;
+            }
 
-    .expand {
-        width: 15px;
-        background-image: url('../Images/ui-icons_454545_256x240.png');
-        background-repeat: no-repeat;
-        background-position: -50px -17px;
-        display: inline-block;
-        cursor: pointer;
-    }
+            .expand {
+                width: 0.8em;
+                height: 0.8em;
+                border-radius: 200px 200px 0px 200px;
+                background: #5D693A;
+                display: inline-block;
+                cursor: pointer;
+            }
 
-    .treeview ul {
-        font: 14px Arial, Sans-Serif;
-        margin: 0px;
-        padding-left: 20px;
-        list-style: none;
-    }
+            .treeview ul {
+                font: 14px Arial, Sans-Serif;
+                margin: 0px;
+                padding-left: 20px;
+                list-style: none;
+            }
 
-    .treeview > li > a {
-        font-weight: bold;
-    }
+            .treeview > li > a {
+                font-weight: bold;
+            }
 
-    .treeview li {
-    }
+            .treeview li {
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
 
-        .treeview li a {
-            padding: 4px;
-            font-size: 12px;
-            display: inline-block;
-            text-decoration: none;
-            width: auto;
-        }
-</style>
-<h2>Simple Treeview from Database Data</h2>
-<div style="border:solid 1px black; padding:10px; background-color:#FAFAFA">
-    <div class="treeview">
-        @if (Model != null && Model.Count() > 0)
-        {
-            <ul>
-                GetTreeView(Model, Model.FirstOrDefault().Parent);
-            </ul>
-        }
+                .treeview li a {
+                    padding: 4px;
+                    font-size: 12px;
+                    display: inline-block;
+                    text-decoration: none;
+                    width: auto;
+                }
+    </style>
+
+    <div style="padding:10px">
+        <div class="treeview">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <ul>
+                    @Treeview.GetTreeView(Model, null)
+                </ul>
+            }
+        </div>
     </div>
-</div>
 
-@* Here We need some Jquery code for make this treeview collapsible *@
-@section Scripts{
-    <script>
-        $(document).ready(function () {
-            $(".treeview li>ul").css('display', 'none'); // Hide all 2-level ul
-            $(".collapsible").click(function (e) {
-                e.preventDefault();
-                $(this).toggleClass("collapse expand");
-                $(this).closest('li').children('ul').slideToggle();
+    @* Here We need some Jquery code for make this treeview collapsible *@
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $(".treeview li>ul").css('display', 'none'); // Hide all 2-level ul
+                $(".collapsible").click(function (e) {
+                    e.preventDefault();
+                    $(this).toggleClass("collapse expand");
+                    $(this).closest('li').children('ul').slideToggle();
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }

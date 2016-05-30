@@ -34,19 +34,23 @@ namespace DAKI.Models
             this.Description = dep.Description;
             this.Parent.Value = dep.ParentId.ToString() ;
             using(var ctx = new UsersContext()){
-                var s = ctx.Departments.FirstOrDefault(d=>d.ParentId == dep.ParentId).Title;
+                var s = ctx.Departments.FirstOrDefault(d=>d.DepartmentId == dep.ParentId).Title;
                 this.Parent.Text = s;
             }
-            foreach (var d in dep.PersonHasJobInDeps)
-                if (d.Job.Manages == true)
-                {
-                    this.ManagerIds.Add(d.JobId);
-                }
-            foreach (var d in dep.Children)
+            //foreach (var d in dep.PersonHasJobInDeps)
+            //    if (d.Job.Manages == true)
+            //    {
+            //        this.ManagerIds.Add(d.JobId);
+            //    }
+            using (var ctx = new UsersContext())
+            {
+                var children = ctx.Departments.Where(d => d.ParentId == dep.DepartmentId);
+                foreach (var d in children)
                 this.Children.Add(new SelectListItem {
                     Value = d.DepartmentId.ToString(),
                     Text = d.Title
                 });
+            }
 
 
         }
@@ -62,17 +66,21 @@ namespace DAKI.Models
                 this.Title = dep.Title;
                 this.Description = dep.Description;
                 this.Rules = dep.Rules;
-                foreach (var d in dep.PersonHasJobInDeps)
-                    if (d.Job.Manages == true)
-                    {
-                        this.ManagerIds.Add(d.JobId);
-                    }
-                foreach (var d in dep.Children)
+                //foreach (var d in dep.PersonHasJobInDeps)
+                //    if (d.Job.Manages == true)
+                //    {
+                //        this.ManagerIds.Add(d.JobId);
+                //    }
+                using (var ctx = new UsersContext())
+            {
+                var children = ctx.Departments.Where(d => d.ParentId == dep.DepartmentId);
+                foreach (var d in children)
                     this.Children.Add(new SelectListItem
                     {
                         Value = d.DepartmentId.ToString(),
                         Text = d.Title
                     });
+                }
                 this.Parent.Value = dep.ParentId.ToString();
                 using (var ctx = new UsersContext())
                 {
@@ -85,13 +93,13 @@ namespace DAKI.Models
         }
 
 
-        public List<SelectListItem> AllDepartments()
+        public static List<SelectListItem> AllDepartments()
         {
             List<Department> all = new List<Department>();
             using (var dc = new UsersContext())
             {
-                if (dc.Departments != null)
-                all = dc.Departments.OrderBy(a => a.Parent.DepartmentId).ToList();
+                if (dc.Departments.Any())
+                all = dc.Departments.OrderBy(a => a.DepartmentId).ToList();
             }
             List<SelectListItem> deps = new List<SelectListItem>();
             foreach (var d in all)

@@ -145,8 +145,14 @@ namespace DAKI.Controllers
                 var dep = ctx.Departments.FirstOrDefault(item => item.DepartmentId == id);
                 if (dep == null)
                     return new HttpNotFoundResult("The department could not be found.");
-                dep.Children.Clear();
-                dep.PersonHasJobInDeps.Clear();
+                
+                var children = ctx.Departments.Where(d => d.ParentId == dep.DepartmentId);
+                foreach (var d in children)
+                    d.ParentId = null;
+                var pers = ctx.PersonHasJobInDeps.Where(d => d.DepartmentId == dep.DepartmentId);
+                foreach (var d in pers)
+                    ctx.PersonHasJobInDeps.Remove(d);
+                
 
                 ctx.Departments.Remove(dep);
                 ctx.SaveChanges();
@@ -175,13 +181,14 @@ namespace DAKI.Controllers
                 return RedirectToAction("Index");   
         }
           */
-
-        public ActionResult Simple()
+        [HttpGet]
+        public ActionResult DepTree()
         {
             List<Department> all = new List<Department>();
             using (var dc = new UsersContext())
             {
-                all = dc.Departments.OrderBy(a => a.Parent).ToList();
+                if (dc.Departments.Any())
+                all = dc.Departments.OrderBy(a => a.ParentId).ToList();
             }
             return View(all);
         }
